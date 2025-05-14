@@ -1,0 +1,289 @@
+/* fundo: #f9f4ef 
+botão: #8c7851
+manchete: #020826
+texto do botão: #fffffe
+paragrafo: #716040
+destacar: #8c7851
+secundário: #eaddcf
+#f0ecec*/
+
+/* outra paleta
+F8F3D9
+EBE5C2
+B9B28A
+504B38 */
+
+/* outra link: https://colorhunt.co/palette/561c246d2932c7b7a3e8d8c4
+
+https://colorhunt.co/palette/000b58003161006a67fff4b7
+
+#000B58
+#003161
+#006A67
+#FFF4B7*/
+
+
+/* Adicionar aqui toda a estilização criada para sua aplicação. */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+* {
+    font-family: "Barlow", Arial, Helvetica, sans-serif;
+}
+
+
+body {
+    margin: 0;
+    background-color: #504b388a;
+
+    
+}
+
+.header .container img{
+    width: 7vw;
+}
+.container {
+    width: 80%;
+    margin: auto;
+    display: flex;
+
+
+}
+
+.header .container {
+    justify-content: space-between;
+
+}
+
+.header {
+    border-bottom: solid #f0ecec 2px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+
+}
+
+.header .container .titulo {
+    color: #fff;
+    font-size: 1rem;
+    
+}
+
+.header .container .logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.header .navbar {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 300px;
+  
+
+}
+
+.navbar a, li {
+    color: #2e2513;
+    text-decoration: none;
+    /* cursor:default; */
+
+}
+
+.banner {
+     background-image: url("../assets/banner-cruz.png"); 
+    background-color: #f0ecec;
+    display: flex;
+    height: 80vh;
+    justify-content: center;
+    width: 100%;
+    margin-top: -5px;
+}
+
+.banner .container {
+    justify-content: center;
+}
+
+.banner .container p {
+    color: white;
+    font-size: 40px;
+    width: 45%;
+
+}
+
+.banner .container p span {
+    font-weight: 600;
+}
+
+.social {
+    background: #fff;
+}
+
+.boxes {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 30px;
+
+}
+
+.box {
+    /* border: solid 2px red; */
+    width: 150px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.box img {
+    width: 50%;
+}
+
+.box h4 {
+    color: crimson;
+}
+
+.container-form {
+    display: flex;
+    background-color: #cee2e5;
+    border: #fff 2px solid;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 300px;
+    border-radius: 5%;
+
+
+}
+
+.banner .login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20%;
+    margin-top: 20px;
+}
+
+
+
+
+.formulario button {
+    width: 100px;
+
+    height: 35px;
+    font-size: small;
+    color: #fff;
+    background-color: rgb(255, 1, 137);
+    border-radius: 5px;
+    text-decoration-line: none;
+    cursor: pointer;
+    border: none;
+
+
+}
+
+.card.card-login {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.card.card.card-login span{
+    color: rgb(207, 121, 167);
+    font-weight: 500;
+    margin: 5px;
+    flex-direction: column;
+
+}
+.card.card-login h2 {
+    color: rgb(207, 121, 167);
+
+
+}
+
+.formulario {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+
+
+.footer{
+      background-color: #30a9ab;
+}
+
+.footer .container {
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+
+  
+
+}
+.agora{
+    font-weight: bold;
+}
+
+
+
+.card.card-cadastro {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card.card-cadastro h2 {
+    color: rgb(207, 121, 167);
+}
+.card.card-cadastro span{
+    color: rgb(207, 121, 167);
+    font-weight: 500;
+    margin: 5px;
+    flex-direction: column;
+
+}
+
+
+.login .container {
+    display: flex;
+    background-color: #cee2e5;
+    border: #fff 2px solid;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 500px;
+    border-radius: 5%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+.formulario input {
+
+    padding: 8px;
+    font-size: medium;
+    border-radius: 8px;
+    border: #30a9ab 2px solid;
+    text-decoration-line: none;
+    width: 300px;
+    margin-bottom: 10px;
+    text-align: center;
+
+}
+
+.campo{
+    flex-direction: column;
+    display: flex;
+}
+.login{
+    background-image: url("../assets/imgs/bg-jelly-fish-para-home.png");
+}
