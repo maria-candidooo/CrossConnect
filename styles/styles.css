@@ -26,7 +26,15 @@ https://colorhunt.co/palette/000b58003161006a67fff4b7
 /* Adicionar aqui toda a estilização criada para sua aplicação. */
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+:root{
+    --cor-principal: #006A67;
+    --cor-secundaria: #89bfff;
+    --cor-terciaria: #1e5290;
+    --cor-azul-escuro: #0c1326;
+    --cor-cinza-claro:#e0e0e0;
+    --cor-cinza-escuro: #262626;
 
+}
 * {
     font-family: "Barlow", Arial, Helvetica, sans-serif;
 }
@@ -34,7 +42,7 @@ https://colorhunt.co/palette/000b58003161006a67fff4b7
 
 body {
     margin: 0;
-    background-color: #504b388a;
+    background-color: var(--cor-principal);
 
     
 }
@@ -63,7 +71,7 @@ body {
 }
 
 .header .container .titulo {
-    color: #fff;
+    color: var(--cor-cinza-claro);
     font-size: 1rem;
     
 }
@@ -84,17 +92,16 @@ body {
 }
 
 .navbar a, li {
-    color: #2e2513;
+    color: var(--cor-cinza-claro);
     text-decoration: none;
     /* cursor:default; */
 
 }
 
 .banner {
-     background-image: url("../assets/banner-cruz.png"); 
-    background-color: #f0ecec;
+     background-image: url("../assets/banner-cruz.jpg"); 
     display: flex;
-    height: 80vh;
+    height: 70vh;
     justify-content: center;
     width: 100%;
     margin-top: -5px;
@@ -102,6 +109,8 @@ body {
 
 .banner .container {
     justify-content: center;
+    backdrop-filter: brightness(50%);
+
 }
 
 .banner .container p {
@@ -116,9 +125,18 @@ body {
 }
 
 .social {
-    background: #fff;
+    background: #fffffff9;
+    margin-top: 0%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 50vh;
 }
 
+.social .sobre-nos {
+    width: 70%;
+    text-align: justify;
+}
 .boxes {
     display: flex;
     justify-content: space-between;
@@ -181,8 +199,6 @@ body {
     text-decoration-line: none;
     cursor: pointer;
     border: none;
-
-
 }
 
 .card.card-login {
@@ -200,8 +216,6 @@ body {
 }
 .card.card-login h2 {
     color: rgb(207, 121, 167);
-
-
 }
 
 .formulario {
@@ -215,7 +229,7 @@ body {
 
 
 .footer{
-      background-color: #30a9ab;
+      background-color: var(--cor-principal);
 }
 
 .footer .container {
