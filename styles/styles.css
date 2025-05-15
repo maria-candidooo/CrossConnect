@@ -60,7 +60,7 @@ body {
 }
 
 .header .container {
-    justify-content: space-between;
+    justify-content: center;
 
 }
 
@@ -81,7 +81,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
     
 }
 .header .navbar {
@@ -89,7 +89,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 300px;
+    width: 90%;
   
 
 }
@@ -101,7 +101,10 @@ body {
 
 }
 
-
+.navbar a:hover{
+    color: #fff;
+    font-weight: 600;
+}
   
  /* .container-banner {
     display: flex;
