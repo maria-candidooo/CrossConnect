@@ -1,174 +1,83 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home - Light of the World</title>
-  <link rel="icon" href="assets/icon/favicon2.ico" />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <title>Energia Solar</title>
   <style>
-    :root {
-      --cor-fundo: #f9f4ef;
-      --cor-botao: #8c7851;
-      --cor-manchete: #020826;
-      --cor-texto-botao: #fffffe;
-      --cor-paragrafo: #716040;
-      --cor-destaque: #8c7851;
-      --cor-secundario: #eaddcf;
-      --cor-container-claro: #ffffff;
-    }
-
-    * {
-      box-sizing: border-box;
-      font-family: 'Barlow', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
-      background-color: var(--cor-fundo);
-      background-image: url("assets/banner.jpeg");
+      margin: 0;
+      font-family: sans-serif;
+      background-image: url('painel-solar.jpg'); /* substitua pela imagem real */
       background-size: cover;
       background-position: center;
-      min-height: 100vh;
-    }
-
-    .header {
-      background-color: var(--cor-botao);
-      padding: 20px 0;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
     .container {
-      width: 80%;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo img {
-      width: 80px;
-    }
-
-    .navbar {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-
-    .navbar a {
-      text-decoration: none;
-      color: #fff;
-      font-weight: 600;
-    }
-
-    .banner {
-      display: flex;
-      align-items: center;
-      height: 90vh;
-    }
-
-    .container-banner {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      width: 100%;
-      backdrop-filter: brightness(60%);
-    }
-
-    .container-claro {
-      background-color: var(--cor-container-claro);
-      padding: 40px;
-      margin-left: 10%;
       max-width: 500px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      border-radius: 10px;
+      background-color: white;
+      padding: 40px;
+      margin: 60px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      position: relative;
     }
 
-    .container-claro h1 {
+    .highlight {
+      background-color: #d9d9d9;
+      display: inline-block;
+      padding: 0 4px;
+    }
+
+    h1 {
       font-size: 2.5em;
-      color: var(--cor-manchete);
-      margin-bottom: 20px;
+      margin-top: 0;
     }
 
-    .container-claro h1 .destaque {
-      background-color: var(--cor-destaque);
-      color: var(--cor-texto-botao);
-      padding: 0 6px;
-    }
-
-    .container-claro p {
-      color: var(--cor-paragrafo);
+    p {
       font-size: 1.2em;
       line-height: 1.6;
-      margin-bottom: 30px;
     }
 
-    .container-claro a.botao-banner {
-      display: inline-block;
-      padding: 12px 24px;
-      background-color: var(--cor-botao);
-      color: var(--cor-texto-botao);
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
+    .button {
+      margin-top: 30px;
+      background-color: #f47937;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      font-size: 1.1em;
+      border-radius: 10px;
+      cursor: pointer;
     }
 
-    .container-claro a.botao-banner:hover {
-      background-color: #6d5c3b;
-    }
-
-    .container-claro small {
-      display: block;
+    .credit {
       margin-top: 20px;
-      color: var(--cor-paragrafo);
+      font-size: 0.9em;
     }
 
-    .container-claro small a {
-      color: var(--cor-destaque);
+    .credit a {
+      color: black;
       text-decoration: underline;
     }
 
-    .footer {
-      background-color: var(--cor-botao);
-      color: #fff;
-      padding: 20px 0;
-      text-align: center;
+    .side-color {
+      position: absolute;
+      top: 0;
+      left: -60px;
+      width: 60px;
+      height: 100%;
+      background-color: #f47937;
     }
   </style>
 </head>
 <body>
-  <div class="header">
-    <div class="container">
-      <div class="logo">
-        <img src="assets/logo2.png" alt="Logo" />
-      </div>
-      <ul class="navbar">
-        <li><a href="#">Inicial</a></li>
-        <li><a href="#">Sobre nós</a></li>
-        <li><a href="#">Comunidade</a></li>
-        <li><a href="login.html">Login</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="banner">
-    <div class="container-banner">
-      <div class="container-claro">
-        <h1><span class="destaque">Um líder em</span> energia solar</h1>
-        <p>
-          Produtos líderes do setor e atendimento ao cliente em todo o mundo, com um compromisso demonstrado com a sustentabilidade.
-        </p>
-        <a href="#" class="botao-banner">CONTATE-NOS</a>
-        <small>Imagem de <a href="https://www.freepik.com" target="_blank">Freepik</a></small>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer">
-    <p>Feito com amor por aluno ♥ SPTech &copy; 2025</p>
+  <div class="container">
+    <div class="side-color"></div>
+    <h1>
+      <span class="highlight">Um líder em</span><br>
+      <span class="highlight">energia</span> solar
+    </h1>
+    <p>Produtos líderes do setor e atendimento ao cliente em todo o mundo, com um compromisso demonstrado com a sustentabilidade.</p>
+    <p class="credit">Imagem de <a href="https://www.freepik.com">Freepik</a></p>
+    <button class="button">CONTATE-NOS</button>
   </div>
 </body>
 </html>
