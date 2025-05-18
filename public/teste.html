@@ -1,83 +1,516 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
-  <title>Energia Solar</title>
+  <title>Tela Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <style>
-    body {
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+    * {
       margin: 0;
-      font-family: sans-serif;
-      background-image: url('painel-solar.jpg'); /* substitua pela imagem real */
-      background-size: cover;
-      background-position: center;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Roboto", sans-serif;
     }
 
     .container {
-      max-width: 500px;
-      background-color: white;
-      padding: 40px;
-      margin: 60px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: rgba(220, 223, 223, 0.45);
+    }
+
+    .content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+      border-radius: 15px;
+      width: 75%;
+      height: 70%;
+      position: relative;
+
+    }
+
+    .content::before {
+      content: "";
+      position: absolute;
+      background-color: #58af9b;
+      width: 40%;
+      height: 100%;
+      border-top-left-radius: 15px;
+      /*para deixar a borda do lado verde arredondada na esquerda*/
+      border-bottom-left-radius: 15px;
+
+      /* left: 60%; */
+    }
+
+    .title {
+      font-size: 26px;
+      font-weight: bold;
+      text-transform: capitalize;
+      /*pega as primeiras letras e deixa em caixa alta*/
+    }
+
+    .title-welcome {
+      color: #fff;
+
+    }
+
+    .title-criarConta {
+      color: #58af9b;
+    }
+
+    .description {
+      font-weight: 300;
+      line-height: 20px; /*altura de linha*/
+    }
+
+    .description-primary {
+      color: #fff;
+      font-size: 12px;
+
+    }
+
+    .description-second {
+      color: #7f8c8d;
+      font-size: 10px;
+
+
+    }
+
+    .first-content {
+      display: flex;
       position: relative;
     }
 
-    .highlight {
-      background-color: #d9d9d9;
-      display: inline-block;
-      padding: 0 4px;
+    .first-column {
+      text-align: center;
+      width: 40%;
+      z-index: 10;
+
     }
 
-    h1 {
-      font-size: 2.5em;
-      margin-top: 0;
+    .second-column {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    p {
-      font-size: 1.2em;
-      line-height: 1.6;
+    .first-content .second-column{
+      z-index: 12;
     }
 
-    .button {
-      margin-top: 30px;
-      background-color: #f47937;
-      color: white;
-      padding: 15px 30px;
+    .formulario {
+      display: flex;
+      flex-direction: column;
+      width: 55%;
+      /* text-align: center; */
+    }
+
+
+    .formulario .label-input input {
       border: none;
-      font-size: 1.1em;
-      border-radius: 10px;
+      height: 35px;
+      background-color: #ecf0f1;
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    .formulario .label-input input:focus {
+      outline: none;
+      /* trocando o azul*/
+      border: 1px solid #7f8c8d;
+    }
+
+    .label-input {
+      background-color: #ecf0f1;
+      width: 100%;
+      margin: 6px;
+      display: flex;
+      align-items: center;
+      border-radius: 5px;
+
+
+    }
+
+    .label-input .icon {
+      color: #7f8c8d;
+      padding: 0 6px;
+    }
+
+    .btn {
+      border-radius: 15px;
+      text-transform: uppercase;
+      color: #fff;
+      font-size: 10px;
+      padding: 10px 50px;
+      /* 10 top e bottom e 50 rigth e left*/
       cursor: pointer;
+      font-weight: bold;
+      width: 150px;
+      align-self: center;
+      margin-top: 0.5rem;
+      
     }
 
-    .credit {
-      margin-top: 20px;
-      font-size: 0.9em;
+    .btn-logar {
+      background: transparent;
+      border: 1px solid #fff;
+      transition: background-color .5s;
+      width: 168px !important;
+
+
     }
 
-    .credit a {
-      color: black;
-      text-decoration: underline;
+    .btn-logar:hover {
+      color: #58af9b;
+      background-color: #fff;
+
     }
 
-    .side-color {
+    .btn-cadastrar {
+      background-color: #58af9b;
+      border: none;
+      transition: background-color .5s; /*suavizando a troca de cor do botao*/
+
+    }
+
+    .btn-cadastrar:hover {
+      background-color: #fff;
+      border: 1px solid #58af9b;
+      color: #58af9b;
+    }
+
+    /*SEGUNDO CONTEUDO (LOGIN)*/
+    .second-content {
       position: absolute;
-      top: 0;
-      left: -60px;
-      width: 60px;
-      height: 100%;
-      background-color: #f47937;
+      display: flex;
     }
+
+    .second-content .first-column {
+      order: 2;
+      z-index: -1;
+      /* opacity: 0; */
+    }
+
+    .second-content .second-column {
+      order: 1;
+      z-index: -1;
+
+      /* opacity: 0; */
+
+    }
+
+    /*CLASS SIGN IN*/
+
+    /* deslocando o conteúdo do form para trás da coluna verde*/
+    .sign-in-js .first-content .second-column{
+      z-index: -1;
+      position: relative;
+      animation: deslocamentoLeft 1.5s;
+    }
+    .sign-up-js .second-content .second-column{
+      z-index: -1;
+      position: relative;
+      animation: deslocamentoRight 1.5s;
+    }
+
+    .sign-in-js .second-content .second-column{
+      z-index: 11;
+    }
+    .sign-in-js .second-content .first-column{
+      z-index: 13;
+    }
+
+    .sign-in-js .content::before{
+      left: 60%;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-top-right-radius: 15px;
+      /*para deixar a borda do lado verde arredondada na esquerda*/
+      border-bottom-right-radius: 15px;
+      animation: slidein 1.5s;
+     z-index: 12;
+    }
+
+    /*CLASS SIGN UP*/
+    .sign-up-js .first-content .first-column{
+      z-index: 13;
+    }
+    .sign-up-js .first-content .second-column{
+      z-index: 11;
+
+    }
+   
+    .sign-up-js .second-content .second-column{
+      z-index: -1;
+
+    }
+    .sign-up-js .content::before{
+      animation: slideout 1.5s;
+      z-index: 12;
+
+    }
+
+    /*ANIMAÇÃO CONTEÚDO FORM*/
+
+    /*Direita*/
+    @keyframes deslocamentoRight {
+      from{
+        left: 0;
+        opacity: 1;
+        z-index: 13;
+      }
+      /*porcentagem de percurso da animação*/
+      25%{
+        left: 80px;
+        opacity: .5;
+        
+
+        
+      }
+      50%{
+        left: 100px;
+        opacity: .2;
+       
+
+
+      }
+      to{
+        left: 170px;
+        opacity: 0;
+        z-index: -1;
+      }
+      
+    }
+
+    /*Esquerda*/
+    @keyframes deslocamentoLeft {
+      from{
+        left: 0;
+        opacity: 1;
+        z-index: 13;
+      }
+      /*porcentagem de percurso da animação*/
+      25%{
+        left: -80px;
+        opacity: .8;
+        
+
+        
+      }
+      50%{
+        left: -100px;
+        opacity: .2;
+       
+
+
+      }
+      to{
+        left: -170px;
+        opacity: 0;
+        z-index: -1;
+      }
+      
+    }
+
+    /*ANIMAÇÃO CSS LOGIN*/
+    @keyframes slidein {
+      from{
+        left: 0;
+        width: 40%;
+      }
+
+      25%{
+        left: 5%;
+        width: 50%;
+
+      }
+      50%{
+        left: 25%;
+        width: 60%;
+
+
+      }
+      75%{
+        left: 45%;
+        width: 50%;
+
+      }
+      to{
+        left: 60%;
+        width: 40%;
+
+      }
+    }
+
+    @keyframes slideout {
+      from{
+        left: 60%;
+        width: 40%;
+      }
+
+      25%{
+        left: 45%;
+        width: 50%;
+
+      }
+      50%{
+        left: 25%;
+        width: 60%;
+
+
+      }
+      75%{
+        left: 5%;
+        width: 50%;
+
+      }
+      to{
+        
+        left: 0;
+        width: 40%;
+
+      }
+    }
+
   </style>
 </head>
-<body>
+
+<body class="">
+
   <div class="container">
-    <div class="side-color"></div>
-    <h1>
-      <span class="highlight">Um líder em</span><br>
-      <span class="highlight">energia</span> solar
-    </h1>
-    <p>Produtos líderes do setor e atendimento ao cliente em todo o mundo, com um compromisso demonstrado com a sustentabilidade.</p>
-    <p class="credit">Imagem de <a href="https://www.freepik.com">Freepik</a></p>
-    <button class="button">CONTATE-NOS</button>
+    <div class="content first-content">
+
+      <div class="first-column">
+        <h2 class="title title-welcome"> Bem vindo de volta!</h2>
+        <p class="description description-primary">Já tem uma conta? Faça Log-in.</p>
+        <!-- <p class="description description-primary">lorem ipsuusgacd ardabsgs </p> -->
+        <button class="btn btn-logar" onclick="realizarLogin()">Log-in</button>
+      </div> <!--first-column -->
+
+      <div class="second-column">
+        <h2 class="title title-criarConta"> Criar Conta</h2>
+        <p class="description description-second">Preencha os campos com suas informações </p>
+
+        <!-- <div class="login">
+        <div class="alerta_erro">
+          <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+          </div>
+        </div> -->
+        <!-- <div class="container">
+          <div class="card card-cadastro">
+            <h2>Bem-vindo!</h2> -->
+        <div class="formulario">
+          <!--
+                             Para inserir mais um campo, copie uma das inputs abaixo.
+                             Assim que inserir vá para o script abaixo.
+                         -->
+
+          <label class="label-input" for="">
+            <i class="fa-regular fa-user icon"></i>
+            <input id="nome_input" type="text" placeholder="Nome" minlength=2 />
+          </label>
+
+          <label class="label-input" for="">
+            <!-- <i class="fa-solid fa-signature"></i> -->
+            <!-- <i class="fa-regular fa-user"></i> -->
+            <!-- <i class="fa-solid fa-file-signature"></i> -->
+            <i class="fa-solid fa-pen-to-square icon"></i>
+
+            <input id="sobrenome_input" type="text" placeholder="Sobrenome" minlength=2 />
+          </label>
+
+          <label class="label-input" for="">
+            <i class="fa-regular fa-envelope icon"></i>
+            <input id="email_input" type="text" placeholder="Email" />
+          </label>
+
+          <label class="label-input" for="">
+            <i class="fa-solid fa-lock icon"></i>
+            <input id="senha_input" type="password" placeholder="Senha" minlength=6 />
+          </label>
+
+          <label class="label-input" for="">
+            <i class="fa-solid fa-unlock icon"></i>
+            <input id="confirmacao_senha_input" type="password" placeholder="Confirme sua senha" minlength=6 />
+          </label>
+
+          <button class="btn btn-cadastrar" onclick="cadastrar()">Criar</button>
+        </div>
+        <!-- <div id="div_aguardar" class="loading-div">
+              <img src="./assets/circle-loading.gif" id="loading-gif" />
+            </div> -->
+
+        <!-- <div id="div_erros_login"></div> -->
+
+
+
+      </div> <!--second-column -->
+    </div> <!--content-first -->
+
+    <div class="content second-content">
+      <div class="first-column">
+        <h2 class="title title-welcome"> Bem-vindo!</h2>
+        <p class="description description-primary">É novo por aqui? Faça seu cadastro!</p>
+        <!-- <p class="description description-primary"> </p> -->
+        <button class="btn btn-logar" onclick="realizarCadastro()">Cadastre-se</button>
+      </div> <!--first-column -->
+
+      <div class="second-column">
+        <h2 class="title title-criarConta"> Login</h2>
+        <p class="description description-second">Entre com suas credenciais.</p>
+
+        <!-- <div class="login">
+          <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+              <span id="mensagem_erro"></span>
+            </div>
+          </div> -->
+        <!-- <div class="container">
+            <div class="card card-cadastro">
+              <h2>Bem-vindo!</h2> -->
+        <div class="formulario">
+          <!--
+                               Para inserir mais um campo, copie uma das inputs abaixo.
+                               Assim que inserir vá para o script abaixo.
+                           -->
+          <label class="label-input" for="">
+            <i class="fa-regular fa-envelope icon"></i>
+            <input id="email_input" type="text" placeholder="Email" />
+          </label>
+
+          <label class="label-input" for="">
+            <i class="fa-solid fa-lock icon"></i>
+            <input id="senha_input" type="password" placeholder="Senha" minlength=6 />
+          </label>
+
+          <button class="btn btn-cadastrar" onclick="entrar()">Entrar</button>
+
+        </div>
+      </div> <!--second-column -->
+    </div> <!--second content-->
   </div>
 </body>
+
 </html>
+<script>
+  var body = document.querySelector("body")
+
+  function realizarLogin() {
+    body.className = "sign-in-js"
+  }
+  function realizarCadastro() {
+    body.className = "sign-up-js"
+  }
+</script>

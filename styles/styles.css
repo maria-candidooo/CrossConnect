@@ -28,7 +28,7 @@ https://colorhunt.co/palette/000b58003161006a67fff4b7
 
 :root{
     --cor-principal: #006A67;
-    --cor-secundaria: #89bfff;
+    --cor-secundaria: #003161;
     --cor-terciaria: #1e5290;
     --cor-azul-escuro: #0c1326;
     --cor-cinza-claro:#e0e0e0;
@@ -55,8 +55,6 @@ body {
     width: 80%;
     margin: auto;
     display: flex;
-
-
 }
 
 .header .container {
@@ -92,7 +90,6 @@ body {
     color: white;
     text-decoration: none;
     /* cursor:default; */
-
 }
 
 .navbar a:hover{
