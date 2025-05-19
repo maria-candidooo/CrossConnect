@@ -2,7 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;400;600;700&display=swap');
 
 :root {
-  --cor-principal: #006A67;
+  /* --cor-principal: #58af9b; */
+  /* --cor-principal: #006A67; */
+  --cor-principal: #127e7a;
   --cor-secundaria: #003161;
   --cor-terciaria: #1e5290;
   --cor-azul-escuro: #0c1326;
@@ -33,6 +35,9 @@ main{
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
               rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   background-color: var(--cor-principal);
+  z-index: 99;
+  position: absolute;
+  width: 100%;
 }
 
 .container-nav {
@@ -81,7 +86,7 @@ li {
 
 .banner {
   display: flex;
-  height: 88vh;
+  height: 100vh;
   width: 100%;
   background-image: url("../assets/banner.jpeg");
 }
@@ -228,7 +233,7 @@ li {
 /*-------------------------------------------------------------------*/
 .container-login {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -241,9 +246,10 @@ li {
   align-items: center;
   background-color: #fff;
   border-radius: 15px;
-  width: 75%;
-  height: 80%;
-  position: relative;
+  width: 70%;
+  height: 78%;
+  position: absolute;
+  margin-top: 12vh;
 }
 
 .content::before {
@@ -295,7 +301,8 @@ li {
 
 .first-content {
   display: flex;
-  position: relative;
+  position: absolute;
+  
 }
 
 .first-column {
@@ -544,3 +551,29 @@ li {
 
   }
 }/*FIM ANIMAÇÃO LOGIN*/
+
+/*CSS MENSAGEM DE ERRO*/
+.alerta_erro{
+  display: flex;
+  height: 70vh;
+  
+}
+
+.card_erro {
+  display: none;
+  background-color: #ffffff;
+  color: black;
+  width: 230px;
+  position: fixed;
+  border-radius: 15px;
+  border: var(--cor-principal) 2px solid;
+  padding: 5px;
+  text-align: center;
+  z-index: 999;
+  right: 10px;
+}
+
+.card_erro #mensagem_erro{
+  font-weight: 500;
+  font-size: 13px;
+}

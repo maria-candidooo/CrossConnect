@@ -7,20 +7,23 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/styles.css">
   <script src="./js/sessao.js"></script>
 
- 
+
 </head>
 
 <body class="">
 
+  <div id="header"></div>
+
   <div class="container-login">
-    
+
     <div class="alerta_erro">
       <div class="card_erro" id="cardErro">
         <span id="mensagem_erro"></span>
       </div>
+
     </div>
     <div class="content first-content">
 
@@ -138,6 +141,8 @@
 
 
   </div>
+  <script src="./js/header.js"></script> <!-- script para trazer o header -->
+
 </body>
 
 </html>
@@ -151,9 +156,9 @@
     body.className = "sign-up-js"
   }
 
+
+
   /*Cadastro lógica*/
-
-
 
   function cadastrar() {
     // aguardar();
@@ -180,7 +185,7 @@
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
+        "⚠️(Mensagem de erro para campos em branco)";
 
       //finalizarAguardar();
       return false;
@@ -232,7 +237,7 @@
 
           setTimeout(() => {
             body.className = "sign-in-js";
-          }, "2000");
+          }, "1500");
 
           // limparFormulario();
           //finalizarAguardar();
@@ -282,38 +287,42 @@
           emailServer: emailVar,
           senhaServer: senhaVar
         })
-      }).then(function (resposta) {
-        console.log("ESTOU NO THEN DO entrar()!")
-
-        if (resposta.ok) {
-          console.log(resposta);
-
-          resposta.json().then(json => {
-            console.log(json);
-            console.log(JSON.stringify(json));
-            sessionStorage.EMAIL_USUARIO = json.email;
-            sessionStorage.NOME_USUARIO = json.nome;
-            sessionStorage.ID_USUARIO = json.idusuario;
-
-            setTimeout(function () {
-              window.location = "./aba.html";
-            }, 0); // apenas para exibir o loading
-
-          });
-
-        } else {
-
-          console.log("Houve um erro ao tentar realizar o login!");
-
-          resposta.text().then(texto => {
-            console.error(texto);
-            finalizarAguardar(texto);
-          });
-        }
-
-      }).catch(function (erro) {
-        console.log(erro);
       })
+        .then(function (resposta) {
+          console.log("ESTOU NO THEN DO entrar()!")
+
+          if (resposta.ok) {
+            console.log(resposta);
+
+            resposta.json().then(json => {
+              console.log(json);
+              console.log(JSON.stringify(json));
+              sessionStorage.EMAIL_USUARIO = json.email;
+              sessionStorage.NOME_USUARIO = json.nome;
+              sessionStorage.ID_USUARIO = json.idusuario;
+
+              setTimeout(function () {
+                window.location = "../dashboard/dashboard.html";
+              }, 0);
+
+            });
+
+          } else {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = `Erro ao tentar realizar o login!<br>
+            Verifique se seu Email e Senha estão corretos.`;
+            finalizarAguardar();
+            return false;
+
+            resposta.text().then(texto => {
+              console.error(texto);
+              finalizarAguardar(texto);
+            });
+          }
+
+        }).catch(function (erro) {
+          console.log(erro);
+        })
 
       return false;
     }
