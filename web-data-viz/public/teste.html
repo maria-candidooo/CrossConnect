@@ -7,398 +7,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/styles.css">
+  <script src="./js/sessao.js"></script>
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Roboto", sans-serif;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: rgba(220, 223, 223, 0.45);
-    }
-
-    .content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #fff;
-      border-radius: 15px;
-      width: 75%;
-      height: 70%;
-      position: relative;
-
-    }
-
-    .content::before {
-      content: "";
-      position: absolute;
-      background-color: #58af9b;
-      width: 40%;
-      height: 100%;
-      border-top-left-radius: 15px;
-      /*para deixar a borda do lado verde arredondada na esquerda*/
-      border-bottom-left-radius: 15px;
-
-      /* left: 60%; */
-    }
-
-    .title {
-      font-size: 26px;
-      font-weight: bold;
-      text-transform: capitalize;
-      /*pega as primeiras letras e deixa em caixa alta*/
-    }
-
-    .title-welcome {
-      color: #fff;
-
-    }
-
-    .title-criarConta {
-      color: #58af9b;
-    }
-
-    .description {
-      font-weight: 300;
-      line-height: 20px; /*altura de linha*/
-    }
-
-    .description-primary {
-      color: #fff;
-      font-size: 12px;
-
-    }
-
-    .description-second {
-      color: #7f8c8d;
-      font-size: 10px;
-
-
-    }
-
-    .first-content {
-      display: flex;
-      position: relative;
-    }
-
-    .first-column {
-      text-align: center;
-      width: 40%;
-      z-index: 10;
-
-    }
-
-    .second-column {
-      width: 60%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .first-content .second-column{
-      z-index: 12;
-    }
-
-    /*  FORMULÁRIO*/
-    .formulario {
-      display: flex;
-      flex-direction: column;
-      width: 55%;
-      /* text-align: center; */
-    }
-
-
-    .formulario .label-input input {
-      border: none;
-      height: 35px;
-      background-color: #ecf0f1;
-      width: 100%;
-      border-radius: 5px;
-    }
-
-    .formulario .label-input input:focus {
-      outline: none;
-      /* trocando o azul*/
-      border: 1px solid #7f8c8d;
-    }
-
-    .label-input {
-      background-color: #ecf0f1;
-      width: 100%;
-      margin: 6px;
-      display: flex;
-      align-items: center;
-      border-radius: 5px;
-
-
-    }
-
-    .label-input .icon {
-      color: #7f8c8d;
-      padding: 0 6px;
-    }
-
-    .btn {
-      border-radius: 15px;
-      text-transform: uppercase;
-      color: #fff;
-      font-size: 10px;
-      padding: 10px 50px;
-      /* 10 top e bottom e 50 rigth e left*/
-      cursor: pointer;
-      font-weight: bold;
-      width: 150px;
-      align-self: center;
-      margin-top: 0.5rem;
-      
-    }
-
-    .btn-logar {
-      background: transparent;
-      border: 1px solid #fff;
-      transition: background-color .5s;
-      width: 168px !important;
-
-
-    }
-
-    .btn-logar:hover {
-      color: #58af9b;
-      background-color: #fff;
-
-    }
-
-    .btn-cadastrar {
-      background-color: #58af9b;
-      border: none;
-      transition: background-color .5s; /*suavizando a troca de cor do botao*/
-
-    }
-
-    .btn-cadastrar:hover {
-      background-color: #fff;
-      border: 1px solid #58af9b;
-      color: #58af9b;
-    }
-    
-.loading-div {
-  width: 50px;
-  display: none;
-}
-
-.loading-div img {
-  height: 50px;
-  width: 50px;
-}
-
-
-
-    /*SEGUNDO CONTEUDO (LOGIN)*/
-    .second-content {
-      position: absolute;
-      display: flex;
-    }
-
-    .second-content .first-column {
-      order: 2;
-      z-index: -1;
-      /* opacity: 0; */
-    }
-
-    .second-content .second-column {
-      order: 1;
-      z-index: -1;
-
-      /* opacity: 0; */
-
-    }
-
-    /*CLASS SIGN IN*/
-
-    /* deslocando o conteúdo do form para trás da coluna verde*/
-    .sign-in-js .first-content .second-column{
-      z-index: -1;
-      position: relative;
-      animation: deslocamentoLeft 0s;
-    }
-    .sign-up-js .second-content .second-column{
-      z-index: -1;
-      position: relative;
-      animation: deslocamentoRight 0s;
-    }
-
-    .sign-in-js .second-content .second-column{
-      z-index: 11;
-    }
-    .sign-in-js .second-content .first-column{
-      z-index: 13;
-    }
-
-    .sign-in-js .content::before{
-      left: 60%;
-      border-top-left-radius: 0px;
-      border-bottom-left-radius: 0px;
-      border-top-right-radius: 15px;
-      /*para deixar a borda do lado verde arredondada na esquerda*/
-      border-bottom-right-radius: 15px;
-      animation: slidein .4s;
-     z-index: 12;
-    }
-
-    /*CLASS SIGN UP*/
-    .sign-up-js .first-content .first-column{
-      z-index: 13;
-    }
-    .sign-up-js .first-content .second-column{
-      z-index: 11;
-
-    }
-   
-    .sign-up-js .second-content .second-column{
-      z-index: -1;
-
-    }
-    .sign-up-js .content::before{
-      animation: slideout .4s;
-      z-index: 12;
-
-    }
-
-    /*ANIMAÇÃO CONTEÚDO FORM*/
-
-    /*Direita*/
-    @keyframes deslocamentoRight {
-      from{
-        left: 0;
-        opacity: 1;
-        z-index: 13;
-      }
-      /*porcentagem de percurso da animação*/
-      /* 25%{
-        left: 80px;
-        opacity: .5;
-        
-
-        
-      }
-      50%{
-        left: 100px;
-        opacity: .2;
-       
-
-
-      } */
-      to{
-        left: 170px;
-        opacity: 0;
-        z-index: -1;
-      }
-      
-    }
-
-    /*Esquerda*/
-    @keyframes deslocamentoLeft {
-      from{
-        left: 0;
-        opacity: 1;
-        z-index: 13;
-      }
-      /*porcentagem de percurso da animação*/
-      /* 25%{
-        left: -80px;
-        opacity: .8;
-        
-
-        
-      }
-      50%{
-        left: -100px;
-        opacity: .2;
-      } */
-      to{
-        left: -170px;
-        opacity: 0;
-        z-index: -1;
-      }
-      
-    }
-
-    /*ANIMAÇÃO CSS LOGIN*/
-    @keyframes slidein {
-      from{
-        left: 0;
-        width: 40%;
-      }
-
-      /* 25%{
-        left: 5%;
-        width: 50%;
-
-      }
-      50%{
-        left: 25%;
-        width: 60%;
-
-
-      }
-      75%{
-        left: 45%;
-        width: 50%;
-
-      } */
-      to{
-        left: 60%;
-        width: 40%;
-
-      }
-    }
-
-    @keyframes slideout {
-      from{
-        left: 60%;
-        width: 40%;
-      }
-/* 
-      25%{
-        left: 45%;
-        width: 50%;
-
-      }
-      50%{
-        left: 25%;
-        width: 60%;
-
-
-      }
-      75%{
-        left: 5%;
-        width: 50%;
-
-      } */
-      to{
-        
-        left: 0;
-        width: 40%;
-
-      }
-    }
-
-  </style>
+ 
 </head>
 
 <body class="">
 
-  <div class="container">
+  <div class="container-login">
+    
     <div class="alerta_erro">
       <div class="card_erro" id="cardErro">
         <span id="mensagem_erro"></span>
@@ -463,8 +81,8 @@
 
           <button class="btn btn-cadastrar" onclick="cadastrar()">Criar</button>
           <div id="div_aguardar" class="loading-div">
-            <img src="./assets/imgs/loading.gif" id="loading-gif">
-        </div>
+            <!-- <img src="./assets/imgs/loading.gif" id="loading-gif"> -->
+          </div>
         </div>
         <!-- <div id="div_aguardar" class="loading-div">
               <img src="./assets/circle-loading.gif" id="loading-gif" />
@@ -489,8 +107,8 @@
         <h2 class="title title-criarConta"> Login</h2>
         <p class="description description-second">Entre com suas credenciais.</p>
 
-       
-        
+
+
         <!-- <div class="container">
             <div class="card card-cadastro">
               <h2>Bem-vindo!</h2> -->
@@ -501,23 +119,23 @@
                            -->
           <label class="label-input" for="">
             <i class="fa-regular fa-envelope icon"></i>
-            <input id="email_input" type="text" placeholder="Email" />
+            <input id="email_login_input" type="text" placeholder="Email" />
           </label>
 
           <label class="label-input" for="">
             <i class="fa-solid fa-lock icon"></i>
-            <input id="senha_input" type="password" placeholder="Senha" minlength=6 />
+            <input id="senha_login_input" type="password" placeholder="Senha" minlength=6 />
           </label>
 
           <button class="btn btn-cadastrar" onclick="entrar()">Entrar</button>
           <div id="div_aguardar" class="loading-div">
             <img src="./assets/imgs/loading.gif" id="loading-gif">
-        </div>
+          </div>
 
         </div>
       </div> <!--second-column -->
     </div> <!--second content-->
-  
+
 
   </div>
 </body>
@@ -547,7 +165,7 @@
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
-  
+
     // var validacaoArroba = emailVar.indexOf('@');
 
 
@@ -557,8 +175,8 @@
       sobrenomeVar == "" ||
       emailVar == "" ||
       senhaVar == "" ||
-      confirmacaoSenhaVar == "" 
-     
+      confirmacaoSenhaVar == ""
+
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
@@ -630,9 +248,80 @@
     return false;
   }
 
- 
+
 
   function sumirMensagem() {
     cardErro.style.display = "none";
   }
+
+
+
+  function entrar() {
+    aguardar();
+
+    var emailVar = email_login_input.value;
+    var senhaVar = senha_login_input.value;
+
+    if (emailVar == "" || senhaVar == "") {
+      cardErro.style.display = "block"
+      mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+      finalizarAguardar();
+      return false;
+    }
+    else {
+
+      console.log("FORM LOGIN: ", emailVar);
+      console.log("FORM SENHA: ", senhaVar);
+
+      fetch("/usuarios/autenticar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          emailServer: emailVar,
+          senhaServer: senhaVar
+        })
+      }).then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
+
+        if (resposta.ok) {
+          console.log(resposta);
+
+          resposta.json().then(json => {
+            console.log(json);
+            console.log(JSON.stringify(json));
+            sessionStorage.EMAIL_USUARIO = json.email;
+            sessionStorage.NOME_USUARIO = json.nome;
+            sessionStorage.ID_USUARIO = json.idusuario;
+
+            setTimeout(function () {
+              window.location = "./aba.html";
+            }, 0); // apenas para exibir o loading
+
+          });
+
+        } else {
+
+          console.log("Houve um erro ao tentar realizar o login!");
+
+          resposta.text().then(texto => {
+            console.error(texto);
+            finalizarAguardar(texto);
+          });
+        }
+
+      }).catch(function (erro) {
+        console.log(erro);
+      })
+
+      return false;
+    }
+  }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none"
+  }
+
+
 </script>
