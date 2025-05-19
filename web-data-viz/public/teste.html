@@ -20,7 +20,7 @@
 
     .container {
       display: flex;
-
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -229,12 +229,12 @@
     .sign-in-js .first-content .second-column{
       z-index: -1;
       position: relative;
-      animation: deslocamentoLeft 1.5s;
+      animation: deslocamentoLeft 0s;
     }
     .sign-up-js .second-content .second-column{
       z-index: -1;
       position: relative;
-      animation: deslocamentoRight 1.5s;
+      animation: deslocamentoRight 0s;
     }
 
     .sign-in-js .second-content .second-column{
@@ -251,7 +251,7 @@
       border-top-right-radius: 15px;
       /*para deixar a borda do lado verde arredondada na esquerda*/
       border-bottom-right-radius: 15px;
-      animation: slidein 1.5s;
+      animation: slidein .4s;
      z-index: 12;
     }
 
@@ -269,7 +269,7 @@
 
     }
     .sign-up-js .content::before{
-      animation: slideout 1.5s;
+      animation: slideout .4s;
       z-index: 12;
 
     }
@@ -284,7 +284,7 @@
         z-index: 13;
       }
       /*porcentagem de percurso da animação*/
-      25%{
+      /* 25%{
         left: 80px;
         opacity: .5;
         
@@ -297,7 +297,7 @@
        
 
 
-      }
+      } */
       to{
         left: 170px;
         opacity: 0;
@@ -314,7 +314,7 @@
         z-index: 13;
       }
       /*porcentagem de percurso da animação*/
-      25%{
+      /* 25%{
         left: -80px;
         opacity: .8;
         
@@ -324,10 +324,7 @@
       50%{
         left: -100px;
         opacity: .2;
-       
-
-
-      }
+      } */
       to{
         left: -170px;
         opacity: 0;
@@ -343,7 +340,7 @@
         width: 40%;
       }
 
-      25%{
+      /* 25%{
         left: 5%;
         width: 50%;
 
@@ -358,7 +355,7 @@
         left: 45%;
         width: 50%;
 
-      }
+      } */
       to{
         left: 60%;
         width: 40%;
@@ -371,7 +368,7 @@
         left: 60%;
         width: 40%;
       }
-
+/* 
       25%{
         left: 45%;
         width: 50%;
@@ -387,7 +384,7 @@
         left: 5%;
         width: 50%;
 
-      }
+      } */
       to{
         
         left: 0;
@@ -402,6 +399,11 @@
 <body class="">
 
   <div class="container">
+    <div class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
+      </div>
+    </div>
     <div class="content first-content">
 
       <div class="first-column">
@@ -487,12 +489,8 @@
         <h2 class="title title-criarConta"> Login</h2>
         <p class="description description-second">Entre com suas credenciais.</p>
 
-        <div class="login">
-          <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-              <span id="mensagem_erro"></span>
-            </div>
-          </div>
+       
+        
         <!-- <div class="container">
             <div class="card card-cadastro">
               <h2>Bem-vindo!</h2> -->
@@ -545,7 +543,7 @@
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
     var nomeVar = nome_input.value;
-    var sobrenomeVar = sobrenome_input
+    var sobrenomeVar = sobrenome_input.value;
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
@@ -618,7 +616,7 @@
             body.className = "sign-in-js";
           }, "2000");
 
-          limparFormulario();
+          // limparFormulario();
           //finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
