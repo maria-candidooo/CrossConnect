@@ -4,11 +4,28 @@
 :root {
   /* --cor-principal: #58af9b; */
   /* --cor-principal: #006A67; */
+  --verde: #58af9b;
   --cor-principal: #127e7a;
   --cor-secundaria: #003161;
   --cor-terciaria: #1e5290;
   --cor-azul-escuro: #0c1326;
   --cor-cinza-claro: #e0e0e0;
+  --cor-azul-escuro: #0c1326;
+  --cor-cinza-claro: #e0e0e0;
+    --primary-brand-color: #ED145B;
+    --secondary-brand-color: #0762C8;
+    --success: #198754;
+    --success-dark: #095c36;
+    --success-light: #9dd3ba;
+    --warning: #ffc107;
+    --warning-dark: #705400;
+    --warning-light: #fdebb3;
+    --danger: #dc3545;
+    --danger-dark: #990c19;
+    --danger-light: #f0c1c6;
+    --new-gray: #CCCCCC;
+    --new-black: #212427;
+    --new-white: #E8E8E8;
 }
 
 * {
@@ -25,7 +42,7 @@ body {
 
 /*CSS TELA DE INDEX*/
 /*-------------------------------------------------------------------*/
-main{
+main {
   margin: 0;
   height: 100vh;
 }
@@ -33,7 +50,7 @@ main{
 .header {
   border-bottom: solid #0664617f 1px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-              rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   background-color: var(--cor-principal);
   z-index: 99;
   position: absolute;
@@ -302,7 +319,7 @@ li {
 .first-content {
   display: flex;
   position: absolute;
-  
+
 }
 
 .first-column {
@@ -434,7 +451,7 @@ li {
   z-index: -1;
 }
 
-                   /*CLASS SIGN IN (login)*/
+/*CLASS SIGN IN (login)*/
 /*-------------------------------------------------------------------*/
 /* deslocando o conteúdo do form para trás da coluna verde*/
 .sign-in-js .first-content .second-column {
@@ -522,7 +539,9 @@ li {
     z-index: -1;
   }
 
-} /*FIM ANIMAÇÃO CONTEÚDO*/
+}
+
+/*FIM ANIMAÇÃO CONTEÚDO*/
 
 /*ANIMAÇÃO CSS LOGIN*/
 @keyframes slidein {
@@ -531,7 +550,7 @@ li {
     width: 40%;
   }
 
- 
+
   to {
     left: 60%;
     width: 40%;
@@ -544,19 +563,22 @@ li {
     left: 60%;
     width: 40%;
   }
+
   to {
 
     left: 0;
     width: 40%;
 
   }
-}/*FIM ANIMAÇÃO LOGIN*/
+}
+
+/*FIM ANIMAÇÃO LOGIN*/
 
 /*CSS MENSAGEM DE ERRO*/
-.alerta_erro{
+.alerta_erro {
   display: flex;
   height: 70vh;
-  
+
 }
 
 .card_erro {
@@ -573,7 +595,181 @@ li {
   right: 10px;
 }
 
-.card_erro #mensagem_erro{
+.card_erro #mensagem_erro {
   font-weight: 500;
   font-size: 13px;
 }
+
+/* SIDE BAR */
+/* --------------------------------------------- */
+
+.sidebar {
+  width: 150px;
+  background-color: var(--cor-principal);
+  padding: 20px;
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: rgba(0, 0, 0, 0.354) 0px 0px 12px 0px;
+  z-index: 1000;
+
+}
+
+.sidebar h1 {
+  font-size: 1.02em;
+  font-weight: bold;
+  /* margin-bottom: 11.5px; */
+
+
+}
+
+.sidebar a {
+  font-size: 0.9em;
+  text-decoration: none;
+  color: #ffffffb7;
+  background-color: rgba(0, 0, 0, 0.166);
+  /* background-color: #625a589e; */
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin: 10px 0;
+  text-align: left;
+  transition: background-color 0.3s;
+  
+
+}
+
+.sidebar a:hover {
+  background-color: rgba(0, 0, 0, 0.616);
+  color: #fff;
+  
+}
+
+.sidebar a:focus {
+  outline: none;
+  font-weight: 700;
+
+}
+.sidebar a i{
+  margin-right: 5px;
+}
+
+.sidebar .logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  /* quase a mesma coisa q o padding */
+  margin-top: 200px;
+  background-color: rgba(0, 0, 0, 0.166);
+  cursor: pointer;
+
+
+}
+
+/* CSS TELA QUIZ */
+/* ---------------------------------------------- */
+    /* Não usar pure white or pure black: https://uxplanet.org/basicdesign-never-use-pure-black-in-typography-36138a3327a6 */
+/* The 4-point grid system: https://medium.com/@sainzkike/controlling-spacing-in-design-systems-multiple-spacing-9bf1afec87f */
+
+
+
+
+#pontuacaoEJogo{
+
+}
+.quiz-cards {
+    display: flex;
+    width: 80%;
+    margin-left:  225px;
+    height: 70vh;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.quiz-cards .card{
+    width: 15vw;
+    height: 50vh;
+    background-color: var(--cor-terciaria);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    /* box-shadow: rgba(20, 20, 22, 0.2) 0px 7px 29px 0px;
+     */
+     box-shadow: rgba(25, 25, 25, 0.35) 0px 5px 15px;
+}
+.quiz-cards .card img{
+ width: 150px;
+ height: 150px;
+ border-radius: 7px;
+}
+.quiz-cards .card .btnIniciarQuiz {
+    font-family: monospace;
+    font-weight: bold;
+    border-radius: 15px;
+    width: 120px;
+    padding: 4px;
+    background-color: #0762C8;
+    font-size: 14px;
+    border: #0762C8;
+    color: #fff;
+
+}
+.quiz-cards .card .btnIniciarQuiz:hover{
+    background-color: transparent;
+    border: #fff 1px solid;
+    color: #fff;
+
+}
+
+.flex-colunar {
+    display: flex;
+    flex-direction: column;
+}
+
+.width-fit-content {
+    width: fit-content;
+}
+
+.border-primary {
+    border: 3px solid var(--primary-brand-color);
+}
+
+.border-secondary {
+    border: 3px solid var(--secondary-brand-color);
+}
+
+.padding-8 {
+    padding: 8px;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-success-with-bg {
+    color: var(--success-dark);
+    background-color: var(--success-light);
+}
+
+.text-warning-with-bg {
+    color: var(--warning-dark);
+    background-color: var(--warning-light);
+}
+
+.text-danger-with-bg {
+    color: var(--danger-dark);
+    background-color: var(--danger-light);
+}
+
+.text-new-gray {
+    color: var(--new-gray);
+} 
+
+
+

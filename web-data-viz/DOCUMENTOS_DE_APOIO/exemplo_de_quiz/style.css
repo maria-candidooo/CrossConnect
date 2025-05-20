@@ -24,9 +24,10 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-button {
+.quiz-cards .card .btnIniciarQuiz {
     font-family: monospace;
     font-weight: bold;
+    background-color: #0762C8;
 }
 
 .flex-colunar {
