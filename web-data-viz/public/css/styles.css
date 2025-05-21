@@ -653,6 +653,8 @@ li {
 .sidebar a:focus {
   outline: none;
   font-weight: 700;
+  background-color: rgba(0, 0, 0, 0.616);
+  color: #fff;
 
 }
 .sidebar a i{
@@ -680,9 +682,6 @@ li {
 /* ---------------------------------------------- */
     /* Não usar pure white or pure black: https://uxplanet.org/basicdesign-never-use-pure-black-in-typography-36138a3327a6 */
 /* The 4-point grid system: https://medium.com/@sainzkike/controlling-spacing-in-design-systems-multiple-spacing-9bf1afec87f */
-
-
-
 
 #pontuacaoEJogo{
 

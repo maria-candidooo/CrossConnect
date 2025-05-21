@@ -10,13 +10,13 @@ function validarSessao() {
       nome_user.innerHTML = `Olá, ${nome}`;
       
     } else {
-        window.location = "../teste.html";
+        window.location = "../login.html";
     }
 }
 
 function limparSessao() {
     sessionStorage.clear();
-    window.location = "../teste.html";
+    window.location = "../login.html";
 }
 
 // carregamento (loading)
