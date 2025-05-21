@@ -4,18 +4,19 @@ function validarSessao() {
     var nome = sessionStorage.NOME_USUARIO;
     // var cpf = sessionStorage.CPF_USUARIO;
 
-    var b_usuario = document.getElementById("b_usuario");
+    var nome_user = document.getElementById("nome_user");
 
     if (email != null && nome != null) {
-        b_usuario.innerHTML = nome;
+      nome_user.innerHTML = `Olá, ${nome}`;
+      
     } else {
-        window.location = "../login.html";
+        window.location = "../teste.html";
     }
 }
 
 function limparSessao() {
     sessionStorage.clear();
-    window.location = "../login.html";
+    window.location = "../teste.html";
 }
 
 // carregamento (loading)
