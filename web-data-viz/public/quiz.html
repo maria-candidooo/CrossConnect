@@ -5,164 +5,241 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exemplo - Quiz</title>
-    <link rel="stylesheet" href="./css/styles.css"> 
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
+
 <body>
-    <div class="main">
+    <div class="main-quiz" id="main-quiz">
         <div id="sidebar"></div>
-    <div id="pontuacaoEJogo">
+        <!-- <h2>QUIZ</h2> -->
+        <img src="./assets/quiz.png" alt="QUIZ" class="imgquiz">
+        <div id="pontuacaoEJogo">
+            <div id="quiz-cards" class="quiz-cards">
+                <div class="card" data-quiz="livroAtos">
+                    <h4>Quiz Livro de Atos</h4>
+                    <img src="./assets/atos.png" alt="">
 
-        <div id="quiz-cards" class="quiz-cards">
-            <div class="card" data-quiz="livroAtos">
-                <img src="./assets/atos.png" alt="">
-                <h4>Quiz Livro de Atos</h4>
+                    <button class="btnIniciarQuiz">Iniciar Quiz</button>
 
-                <button class="btnIniciarQuiz"">Iniciar Quiz</button>
+                </div>
+                <div class="card" data-quiz="biblia1">
+                    <h4>Quiz Bíblia 1</h4>
+                    <img src="./assets/biblia1.png" alt="">
+                    <button class="btnIniciarQuiz">Iniciar Quiz</button>
+
+                </div>
+                <div class="card" data-quiz="biblia2">
+                    <h4>Quiz Bíblia 2</h4>
+                    <img src="./assets/biblia2.png" alt="">
+                    <button class="btnIniciarQuiz">Iniciar Quiz</button>
+
+                </div>
+                <div class="card" data-quiz="livroMateus">
+                    <h4>Quiz Livro de Mateus</h4>
+                    <img src="./assets/mateus.png" alt="">
+                    <button class="btnIniciarQuiz">Iniciar Quiz</button>
+
+                </div>
 
             </div>
-            <div class="card" data-quiz="biblia1">
-                <h4>Quiz Bíblia 1</h4>
-                <button class="btnIniciarQuiz"">Iniciar Quiz</button>
+
+
+            <div id="jogo" class="width-fit-content flex-colunar border-secondary">
+
+                <div id="infoQuestao" class="padding-8">
+                    <span class="questao">Questão atual: <span id="spanNumeroDaQuestaoAtual" class="questao"></span> de
+                        <span id="qtdQuestoes" class="questao"></span>
+                        questões.</span>
+                </div>
+
+                <div id="perguntaDaQuestaoAtual" class="padding-8">
+                    <span id="spanQuestaoExibida" class="text-bold"></span>
+                </div>
+
+                <div id="infoAlternativas" class="padding-8">
+                    <span><em>Escolha uma opção dentre as abaixo:</em></span>
+                </div>
+
+                <div id="opcoes" class="flex-colunar padding-8">
+                    <span>
+                        <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
+                        <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
+                    </span>
+                    <span>
+                        <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
+                        <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
+                    </span>
+                    <span>
+                        <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
+                        <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
+                    </span>
+                    <span>
+                        <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
+                        <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
+                    </span>
+                </div>
+
+                <div id="botoes" class="flex-colunar padding-8 btn-botoes">
+                    <button onclick="submeter()" id="btnSubmeter">Enviar resposta</button>
+                    <!-- <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button> -->
+                    <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
+                    <!-- <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button> -->
+                </div>
 
             </div>
-            <div class="card" data-quiz="biblia2">
-                <h4>Quiz Bíblia 2</h4>
-                <button class="btnIniciarQuiz"">Iniciar Quiz</button>
-
+            <div id="pontuacao" class="flex-colunar width-fit-content border-primary pontuacao">
+                <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
+                    <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"></span></span>
+                    <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
+                </div>
+                <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
+                    <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
+                        <span id="spanPontuacaoFinal">***</span>
+                    </span>
+                    <span id="msgFinal" class="width-fit-content">***</span>
+                </div>
             </div>
-            <div class="card" data-quiz="livroMateus">
-
-            <h4>Quiz Livro de Mateus</h4>
-
-                <button class="btnIniciarQuiz"">Iniciar Quiz</button>
-
-            </div>
-
-        </div>
-
-
-        <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
-            <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
-                <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"></span></span>
-                <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
-            </div>
-            <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
-                <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
-                    <span id="spanPontuacaoFinal">***</span>
-                </span>
-                <span id="msgFinal" class="width-fit-content">***</span>
-            </div>
-        </div>
-
-        <div id="jogo" class="width-fit-content flex-colunar border-secondary">
-
-            <div id="infoQuestao" class="padding-8">
-                <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
-                    questões.</span>
-            </div>
-
-            <div id="perguntaDaQuestaoAtual" class="padding-8">
-                <span id="spanQuestaoExibida" class="text-bold"></span>
-            </div>
-
-            <div id="infoAlternativas" class="padding-8">
-                <span><em>Escolha uma opção dentre as abaixo:</em></span>
-            </div>
-
-            <div id="opcoes" class="flex-colunar padding-8">
-                <span>
-                    <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
-                    <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
-                </span>
-                <span>
-                    <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
-                    <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
-                </span>
-                <span>
-                    <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
-                    <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
-                </span>
-                <span>
-                    <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
-                    <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
-                </span>
-            </div>
-
-            <div id="botoes" class="flex-colunar padding-8">
-                <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
-                <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
-                <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
-                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
-            </div>
-
         </div>
     </div>
-</div>
-<script src="/js/sessao.js"></script><!-- para a função de validar sessao
+    <script src="/js/sessao.js"></script><!-- para a função de validar sessao
  funcionar e aparecer o nome do uúario na side bar -->
 
-<script src="./js/sidebar.js"></script> 
+    <script src="./js/sidebar.js"></script>
     <script>
+
         //vetor com 3 objetos(jsons), cada um representando uma pergunta com 4 alternativas e a alternativa correta.
         let quizLivroAtos = [
 
             {
-                pergunta: "Qual mês tem 30 dias?",
-                alternativaA: "Janeiro",
-                alternativaB: "Dezembro",
-                alternativaC: "Junho",
-                alternativaD: "Agosto",
+                pergunta: "Quantas pessoas haviam no dia em que foi escolhido o substituto de Judas?",
+                alternativaA: "120",
+                alternativaB: "200",
+                alternativaC: "110",
+                alternativaD: "2 mil",
+                alternativaCorreta: "alternativaA"
+            },
+
+            {
+                pergunta: "Quem escreveu o livro Atos?",
+                alternativaA: "Teófilo",
+                alternativaB: "Lucas",
+                alternativaC: "Moisés",
+                alternativaD: "Mateus",
+                alternativaCorreta: "alternativaB"
+            },
+
+            {
+                pergunta: "Para quem foi escrito o livro de Atos?",
+                alternativaA: "Teófilo",
+                alternativaB: "Lucas",
+                alternativaC: "Moisés",
+                alternativaD: "Mateus",
+                alternativaCorreta: "alternativaA"
+            },
+            {
+                pergunta: "Depois de ressuscitar quantos dias Jesus ficou na Terra?",
+                alternativaA: "10 dias",
+                alternativaB: "30 dias",
+                alternativaC: "40 dias",
+                alternativaD: "1 dia",
                 alternativaCorreta: "alternativaC"
             },
-
             {
-                pergunta: "Quantas horas tem em um dia?",
-                alternativaA: "30 horas",
-                alternativaB: "38 horas",
-                alternativaC: "48 horas",
-                alternativaD: "24 horas",
-                alternativaCorreta: "alternativaD"
+                pergunta: "Antes de subir aos céus o que Jesus diz?",
+                alternativaA: "'Nem só de pão viverá o homem'",
+                alternativaB: "'Mas receberão poder quando o Espírito Santo descer sobre vocês, e serão minhas testemunhas tanto em Jerusalém como em toda a Judeia e Samaria e até os confins da Terra'",
+                alternativaC: "'Amém'",
+                alternativaD: "'O Senhor é meu Pastor e nada faltará'",
+                alternativaCorreta: "alternativaB"
             },
-
-            {
-                pergunta: "Qual destes números é ímpar?",
-                alternativaA: "Dez",
-                alternativaB: "Doze",
-                alternativaC: "Oito",
-                alternativaD: "Onze",
-                alternativaCorreta: "alternativaD"
-            }
 
         ]
 
         let quizBiblia1 = [
 
             {
-                pergunta: "Qual mês tem 30 dias?",
-                alternativaA: "Janeiro",
-                alternativaB: "Dezembro",
-                alternativaC: "Junho",
-                alternativaD: "Agosto",
+                pergunta: "Quantos livros tem a bíblia?",
+                alternativaA: "76",
+                alternativaB: "66",
+                alternativaC: "77",
+                alternativaD: "29",
+                alternativaCorreta: "alternativaB"
+            },
+
+            {
+                pergunta: " “Pois, vós sereis julgados com o mesmo julgamento com que julgardes; e sereis medidos, com a mesma medida com que medirdes”. Em que passagem está na bíblia?",
+                alternativaA: "Mateus 7:1-2",
+                alternativaB: "Provérbios 7:14-15",
+                alternativaC: "Êxodo 20:19-20",
+                alternativaD: "Naum 1:3-4",
+                alternativaCorreta: "alternativaA"
+            },
+
+            {
+                pergunta: "Na biblia onde está os dez mandamentos?",
+                alternativaA: "Gênesis 17",
+                alternativaB: "Mateus 14",
+                alternativaC: "Êxodo 20",
+                alternativaD: "Hebreus 11",
+                alternativaCorreta: "alternativaC"
+            },
+            {
+                pergunta: "Qual o primeiro e o último livro da bíblia?",
+                alternativaA: "Salmos - Isaías",
+                alternativaB: "Matheus - Apocalipse",
+                alternativaC: "Deuteronômio - Isaías",
+                alternativaD: "Gênesis - Apocalipse",
+                alternativaCorreta: "alternativaD"
+            },
+            {
+                pergunta: "Quem foi a primeira pessoa na bíblia que realizou de multiplicações de pães?",
+                alternativaA: "João Batista",
+                alternativaB: "Jesus",
+                alternativaC: "Moíses",
+                alternativaD: "Paulo",
+                alternativaCorreta: "alternativaB"
+            },
+            {
+                pergunta: "Quantas pragas foram enviadas ao Egito?",
+                alternativaA: "8",
+                alternativaB: "9",
+                alternativaC: "6",
+                alternativaD: "10",
+                alternativaCorreta: "alternativaA"
+            },
+            {
+                pergunta: "Qual era o nome da montanha onde Moisés recebeu os 10 Mandamentos?",
+                alternativaA: "Monte das Oliveiras",
+                alternativaB: "Monte Horebe",
+                alternativaC: "Monte Sinai",
+                alternativaD: "Alcedama",
+                alternativaCorreta: "alternativaC"
+            },
+            {
+                pergunta: "Quem era a mãe de Samuel?",
+                alternativaA: "Maria",
+                alternativaB: "Isabel",
+                alternativaC: "Marta",
+                alternativaD: "Ana",
+                alternativaCorreta: "alternativaD"
+            },
+            {
+                pergunta: "Qual é o primeiro livro do Novo Testamento?",
+                alternativaA: "João",
+                alternativaB: "Atos dos Apóstolos",
+                alternativaC: "Marcos",
+                alternativaD: "Mateus",
+                alternativaCorreta: "alternativaD"
+            },
+            {
+                pergunta: "Quem foi o discípulo que traiu Jesus?",
+                alternativaA: "Paulo",
+                alternativaB: "Pedro",
+                alternativaC: "Judas",
+                alternativaD: "Mateus",
                 alternativaCorreta: "alternativaC"
             },
 
-            {
-                pergunta: "Quantas horas tem em um dia?",
-                alternativaA: "30 horas",
-                alternativaB: "38 horas",
-                alternativaC: "48 horas",
-                alternativaD: "24 horas",
-                alternativaCorreta: "alternativaD"
-            },
-
-            {
-                pergunta: "Qual destes números é ímpar?",
-                alternativaA: "Dez",
-                alternativaB: "Doze",
-                alternativaC: "Oito",
-                alternativaD: "Onze",
-                alternativaCorreta: "alternativaD"
-            }
 
         ]
 
@@ -200,31 +277,47 @@
         let quizLivroMateus = [
 
             {
-                pergunta: "Qual mês tem 30 dias?",
-                alternativaA: "Janeiro",
-                alternativaB: "Dezembro",
-                alternativaC: "Junho",
-                alternativaD: "Agosto",
+                pergunta: "Quantos dias e noites Jesus jejuou?",
+                alternativaA: "90 dias e 90 noites",
+                alternativaB: "40 dias e 40 noites",
+                alternativaC: "30 dias e 40 noites",
+                alternativaD: "7 dias e 7 noites",
+                alternativaCorreta: "alternativaB"
+            },
+
+            {
+                pergunta: "Qual o parentesco de João e Tiago, Pedro e André?",
+                alternativaA: "Irmãos",
+                alternativaB: "Primos",
+                alternativaC: "Amigos",
+                alternativaD: "Tio e Sobrinho",
+                alternativaCorreta: "alternativaA"
+            },
+
+            {
+                pergunta: "O que Pedro e André faziam quando Jesus os convidou para lhe seguir?",
+                alternativaA: "Dançavam",
+                alternativaB: "Dormiam",
+                alternativaC: "Pescavam",
+                alternativaD: "Caçavam",
                 alternativaCorreta: "alternativaC"
             },
-
             {
-                pergunta: "Quantas horas tem em um dia?",
-                alternativaA: "30 horas",
-                alternativaB: "38 horas",
-                alternativaC: "48 horas",
-                alternativaD: "24 horas",
-                alternativaCorreta: "alternativaD"
+                pergunta: "Qual o primeiro milagre que Jesus realizou?",
+                alternativaA: "Transformou Água em Vinho",
+                alternativaB: "Curou um Leproso",
+                alternativaC: "Multiplicação dos pães e peixes",
+                alternativaD: "A cura do cego em Jericó",
+                alternativaCorreta: "alternativaA"
             },
-
             {
-                pergunta: "Qual destes números é ímpar?",
-                alternativaA: "Dez",
-                alternativaB: "Doze",
-                alternativaC: "Oito",
-                alternativaD: "Onze",
-                alternativaCorreta: "alternativaD"
-            }
+                pergunta: "Quando Jesus fala sobre buscar primeiro o reino de Deus e sua justiça, ele acrescenta uma consequência a essas atitudes. Que consequência ele cita?",
+                alternativaA: "Que as demais coisas serão acrescentadas",
+                alternativaB: "Que você será como salomão",
+                alternativaC: "Será exaltado no céu",
+                alternativaD: "Viverá para sempre",
+                alternativaCorreta: "alternativaA"
+            },
 
         ]
 
@@ -244,42 +337,43 @@
         } //IMPORTANTE: essa função esconde a interface do quiz até o usuario clicar em iniciar
 
         document.querySelectorAll('.btnIniciarQuiz').forEach(button => {
-    button.addEventListener('click', (e) => {
-        const card = e.target.closest('.card');
-        const quizSelecionado = card.getAttribute('data-quiz');
+            button.addEventListener('click', (e) => {
+                const card = e.target.closest('.card');
+                const quizSelecionado = card.getAttribute('data-quiz');
 
-        if (quizSelecionado === "livroAtos") {
-            listaDeQuestoes = quizLivroAtos;
-        } else if (quizSelecionado === "biblia1") {
-            listaDeQuestoes = quizBiblia1;
-        } else if (quizSelecionado === "biblia2") {
-            listaDeQuestoes = quizBiblia2;
-        } else if (quizSelecionado === "livroMateus") {
-            listaDeQuestoes = quizLivroMateus;
-        }
+                if (quizSelecionado === "livroAtos") {
+                    listaDeQuestoes = quizLivroAtos;
+                } else if (quizSelecionado === "biblia1") {
+                    listaDeQuestoes = quizBiblia1;
+                } else if (quizSelecionado === "biblia2") {
+                    listaDeQuestoes = quizBiblia2;
+                } else if (quizSelecionado === "livroMateus") {
+                    listaDeQuestoes = quizLivroMateus;
+                }
 
-        iniciarQuiz(); // Agora chamamos a função para iniciar o quiz
-    });
-});
+                iniciarQuiz(); // Agora chamamos a função para iniciar o quiz
+            });
+        });
 
-function iniciarQuiz() {
-    quantidadeDeQuestoes = listaDeQuestoes.length;
-    document.getElementById('pontuacao').style.display = "flex";
-    document.getElementById('jogo').style.display = "flex";
+        function iniciarQuiz() {
+            quantidadeDeQuestoes = listaDeQuestoes.length;
+            document.getElementById('pontuacao').style.display = "flex";
+            document.getElementById('jogo').style.display = "flex";
+            document.getElementById('main-quiz').style.backgroundImage = "url('./assets/banner-quiz.png')";
 
-    // Oculta todos os botões de iniciar quiz
-    document.querySelectorAll('.btnIniciarQuiz').forEach(btn => btn.style.display = "none");
+            // Oculta todos os botões de iniciar quiz
+            document.querySelectorAll('.btnIniciarQuiz').forEach(btn => btn.style.display = "none");
 
-    document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes;
+            document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes;
 
-    preencherHTMLcomQuestaoAtual(0);
+            preencherHTMLcomQuestaoAtual(0);
 
-    btnSubmeter.disabled = false;
-    btnProx.disabled = true;
-    btnTentarNovamente.disabled = true;
-    document.getElementById('quiz-cards').style.display = "none";
+            btnSubmeter.disabled = false;
+        
+           
+            document.getElementById('quiz-cards').style.display = "none";
 
-}//IMPORTANTE: essa função inicia o quiz, preenche a primeira pergunta, ativa os botões e reseta estados.
+        } //IMPORTANTE: essa função inicia o quiz, preenche a primeira pergunta, ativa os botões e reseta estados.
 
         function preencherHTMLcomQuestaoAtual(index) {
             habilitarAlternativas(true)
@@ -310,12 +404,15 @@ function iniciarQuiz() {
                 alert("Não há alternativas escolhidas. Escolha uma opção.")
             } else {
                 btnSubmeter.disabled = true
-                btnProx.disabled = false
+                
 
                 habilitarAlternativas(false)
-
                 checarResposta()
+                setTimeout(() => {
+                    avancar();
+                }, 2000);
             }
+
         } // verifica se alguma alternativa foi marcada, desativa envio/ativa botão “Próxima”, chama a funcao checarResposta() para validar a resposta.
 
         function habilitarAlternativas(trueOrFalse) {
@@ -329,7 +426,7 @@ function iniciarQuiz() {
         }
 
         function avancar() {
-            btnProx.disabled = true
+           
             btnSubmeter.disabled = false
 
             desmarcarRadioButtons()
@@ -339,6 +436,7 @@ function iniciarQuiz() {
             } else if (numeroDaQuestaoAtual == quantidadeDeQuestoes - 1) { // se o numero da questao atual for igual a penultima questaão
                 alert("Atenção... a próxima é a ultima questão!")
                 preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
+                // document.getElementById('btnTentarNovamente').disabled = false;
             } else { // se não, finalize o jogo
                 finalizarJogo()
             }
@@ -351,7 +449,7 @@ function iniciarQuiz() {
         }
 
         function checarResposta() {
-            const questaoAtual = quizLivroAtos[numeroDaQuestaoAtual] // questão atual 
+            const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual]// questão atual 
             const respostaQuestaoAtual = questaoAtual.alternativaCorreta // qual é a resposta correta da questão atual
 
             const options = document.getElementsByName("option"); // recupera alternativas no html
@@ -366,7 +464,7 @@ function iniciarQuiz() {
             })
 
             // verifica se resposta assinalada é correta
-            options.forEach((option) => {
+             options.forEach((option) => {
                 if (option.checked === true && option.value === respostaQuestaoAtual) {
                     document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
                     pontuacaoFinal++
@@ -429,10 +527,10 @@ function iniciarQuiz() {
 
             document.getElementById('jogo').classList.add("text-new-gray")
 
-            btnProx.disabled = true
+           
             btnSubmeter.disabled = true
             // btnConcluir.disabled = true
-            btnTentarNovamente.disabled = false
+            // btnTentarNovamente.disabled = false
 
         } /*Mostra a pontuação final e mensagem personalizada:
     

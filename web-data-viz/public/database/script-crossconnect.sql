@@ -25,7 +25,7 @@ create table denuncia (
   idusuario int not null,
   descricao varchar(50) not null,
   idpost int not null,
-  status enum('Pendente', 'Avaliada', 'Ignorada') default 'Pendente',
+  status enum('Pendente', 'Avaliada', 	'Ignorada') default 'Pendente',
   constraint fk_denuncia_usuario foreign key (idusuario) references usuario (idusuario),
   constraint fk_denuncia_post foreign key (idpost) references post (idpost)
 );
