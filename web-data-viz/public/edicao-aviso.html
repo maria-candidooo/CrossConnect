@@ -75,18 +75,26 @@
                                 disabled>
                         </label>
                         <label>
-                            Título:
-                            <br>
-                            <input id="input_titulo" maxlength="100" type="text" style="color: rgb(196, 196, 196)"
-                                disabled>
-                        </label>
+                                Categoria:
+                                <br>
+                                <select name="categoria" id="categoria" required>
+                                    <option value="" disabled selected>Selecione uma categoria</option>
+                                    <option value="Eventos">Evento</option>
+                                    <option value="Testemunhos">Testemunho</option>
+                                    <option value="Pedidos de Oração">Pedido de Oração</option>
+                                    <option value="Dúvidas">Dúvida</option>
+                                    <option value="Outros">Outro</option>
+                                 
+                                </select>
+                            </label>
                         <br>
                         <label>
                             Descrição (máximo de 250 caracteres):
                             <br>
-                            <textarea id="textarea_descricao" maxlength="250" rows="5"></textarea>
+                            <textarea id="textarea_conteudo" maxlength="250" rows="5"></textarea>
                         </label>
                         <br>
+                        <img id="imagem_post" src="" alt="Imagem do post" style="max-width:200px; display:block; margin-top:10px;">
                         <button onclick="editar()">Editar</button>
                     </div>
 
@@ -99,7 +107,18 @@
 </html>
 
 <script>
+
     function listarInfosDeUm() {
+         const id = sessionStorage.getItem("ID_POSTAGEM_EDITANDO");
+    fetch(`/avisos/${id}`)
+        .then(res => res.json())
+        .then(dados => {
+            input_id.value = dados.idpost;
+            input_nome.value = dados.nome;
+            textarea_conteudo.value = dados.conteudo;
+            document.getElementById('categoria').value = dados.categoria;
+            document.getElementById('imagem_post').src = dados.imagem || '';
+        });
         console.log("Criar função de trazer informações de post escolhido");
     }
 
@@ -110,13 +129,14 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                descricao: textarea_descricao.value
+                conteudo: textarea_conteudo.value,
+                categoria: document.getElementById('categoria').value
             })
         }).then(function (resposta) {
 
             if (resposta.ok) {
                 window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-                window.location = "/dashboard/mural.html"
+                window.location = "/mural.html"
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {

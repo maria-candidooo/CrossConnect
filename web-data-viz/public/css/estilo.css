@@ -360,3 +360,15 @@ input {
   75%  {transform: rotate(-25deg)}
   100% {transform: rotate(25deg)}
 }
+
+.publicacao-imagem {
+    max-width: 500px;
+    display: flex;
+    margin: 10px 0;
+}
+
+.div-form::before{
+  display: none;
+  z-index: -11;
+position: relative;
+}

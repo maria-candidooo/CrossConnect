@@ -690,12 +690,13 @@ li {
   height: 100vh;
   align-items: center;
   flex-direction: column;
+  background-color: #cce2e1;
 }
 #pontuacaoEJogo{
   display: flex;
   align-items: center;
   width: 100%;
-  height: 80vh;
+  height: 75vh;
   top: 0;
 
 }
@@ -718,24 +719,25 @@ li {
 .quiz-cards .card{
     width: 15vw;
     height: 50vh;
-    background-color: #127e7a90;
+    background-color: #ffffffaf;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    border-radius: 20px;
+    border-radius: 10px;
     /* box-shadow: rgba(20, 20, 22, 0.2) 0px 7px 29px 0px;
      */
      box-shadow: rgba(25, 25, 25, 0.35) 0px 5px 15px;
 }
 .quiz-cards .card img{
  width: 150px;
- height: 150px;
+ height: 130px;
  border-radius: 7px;
+ margin-top: 0;
 }
 .quiz-cards .card h4{
-  color: #fff;
-  margin-bottom: 5px;
+  color: var(--cor-principal);
+  margin-bottom: 0px;
 }
 .quiz-cards .card .btnIniciarQuiz {
     
@@ -763,10 +765,12 @@ li {
     display: flex;
     flex-direction: column;
     
+    
 }
 
 .width-fit-content {
     width: fit-content;
+    
 }
 
 .border-primary {
@@ -781,20 +785,25 @@ li {
     padding: 8px;
     width: 100%;
     display: flex;
+    /* text-align: center; */
 }
 .padding-8 span{
   font-size: 14px;
 }
+
 .padding-8 .questao{
   font-size: 20px !important;
   font-weight: bold;
   color: #127e7a;
   text-align: center;
   width: 100%;
+  margin-top: -10px ;
 }
 
 .text-bold {
     font-weight: bold;
+  text-align: center;
+
 }
 
 .text-success-with-bg {
@@ -822,12 +831,12 @@ li {
 }
 
  #jogo{
-  margin-left:  400px;
+  margin-left:  450px;
   
-  width: 40%;
+  width: 35%;
   justify-content: center;
   border-radius: 5px;
-  height: 70vh;
+  height: 65vh;
   background-color: #fff;
   top: 0;
   margin-bottom: 15px;
@@ -842,7 +851,7 @@ li {
 .btn-botoes{
 align-items: center;
 }
-#btnSubmeter, #btnProx, #btnTentarNovamente{
+#btnSubmeter{
  background-color: #58af9b;
  border: none;
  border-radius: 5px;
@@ -851,8 +860,9 @@ align-items: center;
  cursor: pointer;
  width: 190px;
  padding: 4px;
+ height: 30px;
 }
-#btnSubmeter:hover, #btnProx:hover, #btnTentarNovamente:hover{
+#btnSubmeter:hover{
   font-weight: bold;
   color: white;
 

@@ -14,10 +14,26 @@ function listar(req, res) {
     });
 }
 
-function listarPorUsuario(req, res) {
-    var idUsuario = req.params.idUsuario;
+function buscarPorId(req, res) {
+    var idpost = req.params.idpost;
+    avisoModel.buscarPorId(idpost)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado[0]);
+            } else {
+                res.status(404).send("Post não encontrado!");
+            }
+        })
+        .catch(function (erro) {
+            // console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
 
-    avisoModel.listarPorUsuario(idUsuario)
+function listarPorUsuario(req, res) {
+    var idusuario = req.params.idusuario;
+
+    avisoModel.listarPorUsuario(idusuario)
         .then(
             function (resultado) {
                 if (resultado.length > 0) {
@@ -39,10 +55,10 @@ function listarPorUsuario(req, res) {
         );
 }
 
-function pesquisarDescricao(req, res) {
-    var descricao = req.params.descricao;
+function pesquisarConteudo(req, res) {
+    var conteudo = req.params.conteudo;
 
-    avisoModel.pesquisarDescricao(descricao)
+    avisoModel.pesquisarConteudo(conteudo)
         .then(
             function (resultado) {
                 if (resultado.length > 0) {
@@ -61,18 +77,20 @@ function pesquisarDescricao(req, res) {
 }
 
 function publicar(req, res) {
-    var titulo = req.body.titulo;
-    var descricao = req.body.descricao;
-    var idUsuario = req.params.idUsuario;
+    var categoria = req.body.categoria;
+    var conteudo = req.body.conteudo;
+    var idusuario = req.params.idusuario;
+    var imagem =  req.file ? '/uploads/' + req.file.filename : null; // Caminho salvo
+    // var data = req.params.data;
 
-    if (titulo == undefined) {
-        res.status(400).send("O título está indefinido!");
-    } else if (descricao == undefined) {
-        res.status(400).send("A descrição está indefinido!");
-    } else if (idUsuario == undefined) {
+    if (categoria == undefined) {
+        res.status(400).send("A categoria está indefinido!");
+    } else if (conteudo == undefined) {
+        res.status(400).send("O conteúdo está indefinido!");
+    } else if (idusuario == undefined) {
         res.status(403).send("O id do usuário está indefinido!");
     } else {
-        avisoModel.publicar(titulo, descricao, idUsuario)
+        avisoModel.publicar(idusuario, conteudo,imagem, categoria, null)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -89,10 +107,10 @@ function publicar(req, res) {
 }
 
 function editar(req, res) {
-    var novaDescricao = req.body.descricao;
-    var idAviso = req.params.idAviso;
+    var novaDescricao = req.body.conteudo;
+    var idpost = req.params.idpost;
 
-    avisoModel.editar(novaDescricao, idAviso)
+    avisoModel.editar(novaDescricao, idpost)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -109,9 +127,9 @@ function editar(req, res) {
 }
 
 function deletar(req, res) {
-    var idAviso = req.params.idAviso;
+    var idpost = req.params.idpost;
 
-    avisoModel.deletar(idAviso)
+    avisoModel.deletar(idpost)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -128,9 +146,23 @@ function deletar(req, res) {
 
 module.exports = {
     listar,
+    buscarPorId,
     listarPorUsuario,
-    pesquisarDescricao,
+    pesquisarConteudo,
     publicar,
     editar,
     deletar
 }
+
+// for (let i = 0; i < resposta.length; i++) {
+//     var publicacao = resposta[i];
+//     // ...
+//     if (publicacao.imagem) {
+//         var img = document.createElement("img");
+//         img.src = publicacao.imagem;
+//         img.alt = "Imagem do post";
+//         img.className = "publicacao-imagem";
+//         divPublicacao.appendChild(img);
+//     }
+//     // ...
+// }
