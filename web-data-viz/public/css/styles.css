@@ -755,8 +755,8 @@ li {
 }
 .quiz-cards .card .btnIniciarQuiz:hover{
     background-color: transparent;
-    border: #fff 1px solid;
-    color: #fff;
+    border: var(--cor-principal) 1px solid;
+    color: var(--cor-principal);
     transition: .5s;
 
 }

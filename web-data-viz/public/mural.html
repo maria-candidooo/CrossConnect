@@ -33,7 +33,7 @@
                 </div>
                 <div class="container">
                     <button onclick="exibirPublicar()">Fazer um post</button>
-                    <div class="div-form">
+                    <div class="div-form" id="div-form" style="display: none;">
                         <form id="form_postagem" method="post" enctype="multipart/form-data"
                             onsubmit="return publicar()">
                             
@@ -67,7 +67,7 @@
                             <button>Enviar</button>
                         </form>
                     </div>
-                    <h1>Mural de Avisos</h1>
+                    <h1>Publicações</h1>
                     <div class="div-results">
                         <div id="feed_container" class="feed-container">
                         </div>
@@ -87,7 +87,7 @@
 </html>
 
 <script>
-    var body = document.querySelector("body")
+   
 
 
     // document.getElementById("nome_user").innerHTML = sessionStorage.NOME_USUARIO;
@@ -97,17 +97,22 @@
     }
 
     function exibirPublicar() {
-    body.className = "form_postagem"
-
-    publicar();
+    var divForm = document.getElementById("div-form");
+    // Alterna entre mostrar e esconder
+    if (divForm.style.display === "none" || divForm.style.display === "") {
+        divForm.style.display = "block";
+    } else {
+        divForm.style.display = "none";
+    }
+}
 
         
-    }
     function publicar() {
         var idusuario = sessionStorage.ID_USUARIO;
         var nome = sessionStorage.NOME_USUARIO;
         var form = document.getElementById("form_postagem");
         var formData = new FormData(form);
+        document.getElementById("div-form").style.display = "none"; // para o form desaparecer quando o post for publicado
 
         fetch(`/avisos/publicar/${idusuario}`, {
             method: "POST",

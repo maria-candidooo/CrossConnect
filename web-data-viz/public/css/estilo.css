@@ -367,8 +367,11 @@ input {
     margin: 10px 0;
 }
 
-.div-form::before{
-  display: none;
-  z-index: -11;
-position: relative;
-}
+/*  */
+/* .div-results .feed-container {
+  background-color: #212124;
+  border-radius: 5px;
+  margin-bottom: 80px;
+  display: flex;
+  flex-direction: column-reverse;
+} */
