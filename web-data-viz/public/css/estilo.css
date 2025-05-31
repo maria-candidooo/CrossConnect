@@ -361,11 +361,7 @@ input {
   100% {transform: rotate(25deg)}
 }
 
-.publicacao-imagem {
-    max-width: 500px;
-    display: flex;
-    margin: 10px 0;
-}
+
 
 /*  */
 /* .div-results .feed-container {

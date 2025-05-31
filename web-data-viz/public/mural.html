@@ -19,7 +19,7 @@
         rel="stylesheet">
 </head>
 
-<body onload="atualizarFeed()" style="background-color: #161618;">
+<body onload="atualizarFeed()">
 
     <div class="janela">
 
@@ -41,7 +41,7 @@
                             <label>
                                 Categoria:
                                 <br>
-                                <select name="categoria" id="categoria" required>
+                                <select name="categoria" id="categoria"  class="select-post" required>
                                     <option value="" disabled selected>Selecione uma categoria</option>
                                     <option value="Eventos">Evento</option>
                                     <option value="Testemunhos">Testemunho</option>
@@ -55,13 +55,13 @@
                             <label>
                                 Conteúdo (máximo de 600 caracteres):
                                 <br>
-                                <textarea name="conteudo" id="textarea_conteudo" maxlength="250" rows="5"
+                                <textarea name="conteudo" id="textarea_conteudo" maxlength="600" rows="5"
                                     required></textarea>
                             </label>
                             <br><br>
                             <label>
                                 Imagem:
-                                <input type="file" name="imagem" accept="image/*">
+                                <input type="file" name="imagem"  accept="image/*">
                             </label>
                             <br><br>
                             <button>Enviar</button>
@@ -203,15 +203,15 @@
                         if (publicacao.imagem) {
                             var img = document.createElement("img");
                             img.src = publicacao.imagem;
-                            img.alt = "Imagem do post";
+                            img.alt = "";
                             img.className = "publicacao-imagem";
                             divPublicacao.appendChild(img);
                         }
 
-                        spanID.innerHTML = "ID: <b>" + publicacao.idpost + "</b>";
+                        spanID.innerHTML = "ID POST: <b>" + publicacao.idpost + "</b>";
                         spancategoria.innerHTML = "Categoria: <b>" + publicacao.categoria + "</b>";
                         spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
-                        divconteudo.innerHTML = "Descrição: <b>" + publicacao.conteudo + "</b>";
+                        divconteudo.innerHTML = "Legenda: <b>" + publicacao.conteudo + "</b>";
                         btnEditar.innerHTML = "Editar";
                         btnDeletar.innerHTML = "Deletar";
 
