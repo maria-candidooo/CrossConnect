@@ -20,15 +20,11 @@ create table post (
   constraint fk_post_usuario foreign key (idusuario) references usuario (idusuario)
 );
 
-create table denuncia (
-  iddenuncia int primary key  auto_increment,
-  idusuario int not null,
-  descricao varchar(50) not null,
-  idpost int not null,
-  status enum('Pendente', 'Avaliada', 	'Ignorada') default 'Pendente',
-  constraint fk_denuncia_usuario foreign key (idusuario) references usuario (idusuario),
-  constraint fk_denuncia_post foreign key (idpost) references post (idpost)
-);
+create table quiz(
+idquiz int primary key auto_increment,
+idusuario int,
+pontuacao int,
+foreign key (idusuario) references usuario(idusuario));
 
 create table favoritos (
   idfavorito int primary key auto_increment,
@@ -39,4 +35,6 @@ create table favoritos (
   constraint fk_favoritos_usuario foreign key (idusuario) references usuario (idusuario)
 );
 select * from usuario;
+
+select * from quiz;
 

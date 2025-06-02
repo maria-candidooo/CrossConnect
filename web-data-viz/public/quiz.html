@@ -81,7 +81,7 @@
 
                 <div id="botoes" class="flex-colunar padding-8 btn-botoes">
                     <button onclick="submeter()" id="btnSubmeter">Enviar resposta</button>
-                   
+
                 </div>
 
             </div>
@@ -367,8 +367,8 @@
             preencherHTMLcomQuestaoAtual(0);
 
             btnSubmeter.disabled = false;
-        
-           
+
+
             document.getElementById('quiz-cards').style.display = "none";
 
         } //IMPORTANTE: essa função inicia o quiz, preenche a primeira pergunta, ativa os botões e reseta estados.
@@ -394,7 +394,7 @@
             for (let i = 0; i < options.length; i++) {
                 if (options[i].checked) {
                     hasChecked = true
-                    break
+                    break;
                 }
             }
 
@@ -402,7 +402,6 @@
                 alert("Não há alternativas escolhidas. Escolha uma opção.")
             } else {
                 btnSubmeter.disabled = true
-                
 
                 habilitarAlternativas(false)
                 checarResposta()
@@ -424,7 +423,7 @@
         }
 
         function avancar() {
-           
+
             btnSubmeter.disabled = false
 
             desmarcarRadioButtons()
@@ -462,7 +461,7 @@
             })
 
             // verifica se resposta assinalada é correta
-             options.forEach((option) => {
+            options.forEach((option) => {
                 if (option.checked === true && option.value === respostaQuestaoAtual) {
                     document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
                     pontuacaoFinal++
@@ -518,6 +517,7 @@
 
             textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos) * 100) + "% das questões."
 
+           
 
             document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
             document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
@@ -525,18 +525,32 @@
 
             document.getElementById('jogo').classList.add("text-new-gray")
 
-           
+
             btnSubmeter.disabled = true
             // btnConcluir.disabled = true
             // btnTentarNovamente.disabled = false
+             fetch("/quiz/guardarPontuacao", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    pontuacaoServer: pontuacaoFinal,
+                    idusuarioServer: sessionStorage.ID_USUARIO 
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Pontuação salva:", data);
+                })
+                .catch(err => {
+                    console.error("Erro ao salvar pontuação:", err);
+                });
 
         } /*Mostra a pontuação final e mensagem personalizada:
     
     menos de 30%: vermelho
     30% a 89%: laranja
     90% ou mais: verde
-    desativa botões de submeter e avançar.
-    ativa o botão "tentar novamente".*/
+    desativa botão de submeter.*/
         window.onload = function () {
             onloadEsconder();
         };
