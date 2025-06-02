@@ -40,6 +40,7 @@ app.use("/favoritos", favoritosRouter);
 app.use("/quiz", quizRouter);
 app.use("/empresas", empresasRouter);
 app.use("/aquarios", aquariosRouter);
+
 // app.use("/categorias", categoriasRouter);
 
 app.listen(PORTA_APP, function () {

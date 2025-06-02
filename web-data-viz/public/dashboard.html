@@ -35,10 +35,11 @@
 
         <div class="graficos">
             <div class="grafico-categoria">
-                <canvas id="myChart"></canvas>
+                <canvas id="graficoCategoria"></canvas>
             </div> <!-- grafico-categoria  -->
 
             <div class="grafico-usuarios">
+                <canvas id="graficoUsers"></canvas>
 
             </div><!-- grafico-usuario  -->
 
@@ -65,7 +66,7 @@
             const legendas = jsoncategorias.map(dado => dado.categoria);
             const valores = jsoncategorias.map(dado => dado.qtd);
 
-            const ctx = document.getElementById('myChart');
+            const ctx = document.getElementById('graficoCategoria');
 
             new Chart(ctx, {
                 type: 'bar',
@@ -75,7 +76,7 @@
                         label: 'Quantidade de posts',
                         data: valores,
                         borderWidth: 1,
-                        backgroundColor: '#e74c3c'
+                        backgroundColor: '#58af9b'
 
                     }]
                 },
@@ -91,6 +92,38 @@
             });
 
         });
+
+         fetch('/usuarios/qtd')
+        .then(res => res.json()).then(jsonUsers => {
+            const legendas = jsonUsers.map(dado => dado.nome.toUpperCase() + ` ` + dado.sobrenome.toUpperCase());
+            const valores = jsonUsers.map(dado => dado.qtd);
+
+            const grafico2 = document.getElementById('graficoUsers');
+
+            new Chart(grafico2, {
+                type: 'bar',
+                data: {
+                    labels: legendas,
+                    datasets: [{
+                        label: 'Quantidade de posts',
+                        data: valores,
+                        borderWidth: 1,
+                        backgroundColor: '#58af9b'
+
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                   
+                     indexAxis: 'y',
+                    
+                }
+            });
+
+        });
+
+
 
 
 

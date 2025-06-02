@@ -22,7 +22,20 @@ function cadastrar(nome, sobrenome, email, senha) {
     return database.executar(instrucaoSql);
 }
 
+
+function qtdPostUsuario() {
+
+  var instrucaoSql = `select count(p.idusuario) as qtd, u.nome, u.sobrenome
+      from post p
+      join usuario u on p.idusuario = u.idusuario
+      group by  u.idusuario
+      order by qtd desc`;
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    qtdPostUsuario
 };

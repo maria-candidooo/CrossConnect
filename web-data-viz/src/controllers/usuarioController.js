@@ -51,8 +51,8 @@ function cadastrar(req, res) {
     var sobrenome = req.body.sobrenomeServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
-    
-  
+
+
 
 
     // Faça as validações dos valores
@@ -87,7 +87,16 @@ function cadastrar(req, res) {
     }
 }
 
+function qtdPostUsuario(req, res) {
+    usuarioModel.qtdPostUsuario()
+        .then(resultado => res.json(resultado))
+        .catch(erro => res.status(500).json(erro));
+
+
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    qtdPostUsuario
 }
