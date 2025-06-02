@@ -6,10 +6,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Avisos</title>
+    <title>Crossconnect | Feed</title>
 
     <link rel="stylesheet" href="./css/dashboards.css">
-    <link rel="stylesheet" href="./css/estilo.css" />
+    <!-- <link rel="stylesheet" href="./css/estilo.css" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
@@ -22,13 +25,8 @@
 <body onload="atualizarFeed()">
 
     <div class="janela">
-
         <div id="sidebar"></div>
-
-
         <div class="dash-right">
-
-
             <div class="avisos">
                 <div id="alerta">
                 </div>
@@ -38,10 +36,11 @@
                             onsubmit="return publicar()">
 
                             <br><br>
+                            <h2>Novo Post</h2>
                             <label>
                                 Categoria:
                                 <br>
-                                <select name="categoria" id="categoria"  class="select-post" required>
+                                <select name="categoria" id="categoria" class="select-post" required>
                                     <option value="" disabled selected>Selecione uma categoria</option>
                                     <option value="Eventos">Evento</option>
                                     <option value="Testemunhos">Testemunho</option>
@@ -61,7 +60,7 @@
                             <br><br>
                             <label>
                                 Imagem:
-                                <input type="file" name="imagem"  accept="image/*">
+                                <input type="file" name="imagem" class="img-btn" accept="image/*">
                             </label>
                             <br><br>
                             <button>Enviar</button>
@@ -100,7 +99,7 @@
 
     function exibirPublicar() {
         var divForm = document.getElementById("div-form");
-        // Alterna entre mostrar e esconder
+        // mostrar e esconder
         if (divForm.style.display === "none" || divForm.style.display === "") {
             divForm.style.display = "block";
         } else {
@@ -156,7 +155,7 @@
         }).then(function (resposta) {
 
             if (resposta.ok) {
-                window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                window.alert("Seu post foi deletado com sucesso " + sessionStorage.getItem("NOME_USUARIO") + "!");
                 window.location = "/mural.html"
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
@@ -169,93 +168,119 @@
     }
 
     function atualizarFeed() {
+        fetch(`/favoritos/${sessionStorage.ID_USUARIO}`)
+            .then(res => res.json())
+            .then(favoritos => {
+                fetch("/avisos/listar")
+                    .then(resposta => resposta.json())
+                    .then(posts => {
+                        var feed = document.getElementById("feed_container");
+                        feed.innerHTML = "";
+                        for (let i = 0; i < posts.length; i++) {
+                            let publicacao = posts[i];
+                            let favoritado = favoritos.some(fav => fav.idpost == publicacao.idpost);
 
-        fetch("/avisos/listar").then(function (resposta) {
-            if (resposta.ok) {
-                if (resposta.status == 204) {
-                    var feed = document.getElementById("feed_container");
-                    var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
-                    feed.appendChild(mensagem);
-                    throw "Nenhum resultado encontrado!!";
-                }
+                            let btnFavoritar = document.createElement("button");
+                            btnFavoritar.innerHTML = favoritado
+                                ? `<i class="fa-solid fa-heart" style="color: #e74c3c"></i>`
+                                : `<i class="fa-regular fa-heart"></i>`;
+                            btnFavoritar.setAttribute("data-favoritado", favoritado);
+
+                            btnFavoritar.onclick = function () {
+                                let estaFavoritado = btnFavoritar.getAttribute("data-favoritado") === "true";
+                                if (!estaFavoritado) {
+                                    fetch('/favoritos', {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({
+                                            idusuario: sessionStorage.ID_USUARIO,
+                                            idpost: publicacao.idpost,
+                                        })
+                                    }).then(res => {
+                                        if (res.ok) {
+                                            btnFavoritar.innerHTML = `<i class="fa-solid fa-heart" style="color: #e74c3c"></i>`;
+                                            btnFavoritar.setAttribute("data-favoritado", "true");
+                                        }
+                                    });
+                                } else {
+                                    fetch(`/favoritos/${publicacao.idpost}/${sessionStorage.ID_USUARIO}`, {
+                                        method: 'DELETE'
+                                    }).then(res => {
+                                        if (res.ok) {
+                                            btnFavoritar.innerHTML = `<i class="fa-regular fa-heart"></i>`;
+                                            btnFavoritar.setAttribute("data-favoritado", "false");
+                                        }
+                                    });
+                                }
+                            };
+
+                            // criando e manipulando elementos do HTML via JavaScript
+                            let divPublicacao = document.createElement("div");
+                            let spanID = document.createElement("span");
+                            let spancategoria = document.createElement("span");
+                            let spanNome = document.createElement("span");
+                            let divconteudo = document.createElement("div");
+                            let divButtons = document.createElement("div");
+                            let btnEditar = document.createElement("button");
+                            let btnDeletar = document.createElement("button");
 
 
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                            // cria elemento de imagem se houver imagem
+                            if (publicacao.imagem) {
+                                var img = document.createElement("img");
+                                img.src = publicacao.imagem;
+                                img.alt = "";
+                                img.className = "publicacao-imagem";
+                                divPublicacao.appendChild(img);
+                            }
 
-                    var feed = document.getElementById("feed_container");
-                    feed.innerHTML = "";
-                    for (let i = 0; i < resposta.length; i++) {
-                        var publicacao = resposta[i];
+                            spanID.innerHTML = "ID POST: <b>" + publicacao.idpost + "</b>";
+                            spancategoria.innerHTML = "Categoria: <b>" + publicacao.categoria + "</b>";
+                            spanNome.innerHTML = "Autor: <b>" + publicacao.nome.toUpperCase() + " " + publicacao.sobrenome.toUpperCase() + "</b>";
+                            divconteudo.innerHTML = "Legenda: <b>" + publicacao.conteudo + "</b>";
+                            btnEditar.innerHTML = "Editar";
+                            btnDeletar.innerHTML = "Deletar";
 
-                        // criando e manipulando elementos do HTML via JavaScript
-                        var divPublicacao = document.createElement("div");
-                        var spanID = document.createElement("span");
-                        var spancategoria = document.createElement("span");
-                        var spanNome = document.createElement("span");
-                        var divconteudo = document.createElement("div");
-                        var divButtons = document.createElement("div");
-                        var btnEditar = document.createElement("button");
-                        var btnDeletar = document.createElement("button");
 
-                        // cria elemento de imagem se houver imagem
-                        if (publicacao.imagem) {
-                            var img = document.createElement("img");
-                            img.src = publicacao.imagem;
-                            img.alt = "";
-                            img.className = "publicacao-imagem";
-                            divPublicacao.appendChild(img);
+                            divPublicacao.className = "publicacao";
+                            spancategoria.id = "inputNumero" + publicacao.idpost;
+                            spanNome.className = "publicacao-nome";
+                            spancategoria.className = "publicacao-categoria";
+                            divconteudo.className = "publicacao-conteudo";
+                            divButtons.className = "div-buttons"
+
+                            // para só aparecer o botão de editar e deletar se o usuario logado for o dono do post
+                            if (publicacao.idusuario == sessionStorage.ID_USUARIO) {
+
+                                btnEditar.className = "publicacao-btn-editar"
+                                btnEditar.id = "btnEditar" + publicacao.idpost;
+                                btnEditar.setAttribute("onclick", `editar(${publicacao.idpost})`);
+
+                                btnDeletar.className = "publicacao-btn-editar"
+                                btnDeletar.id = "btnDeletar" + publicacao.idpost;
+                                btnDeletar.setAttribute("onclick", `deletar(${publicacao.idpost})`);
+
+                                divButtons.appendChild(btnEditar);
+                                divButtons.appendChild(btnDeletar);
+                            }
+
+                            divButtons.appendChild(btnFavoritar);
+
+                            divPublicacao.appendChild(spanID);
+                            divPublicacao.appendChild(spanNome);
+                            divPublicacao.appendChild(spancategoria);
+                            divPublicacao.appendChild(divconteudo);
+                            divPublicacao.appendChild(divButtons);
+                            feed.appendChild(divPublicacao);
                         }
 
-                        spanID.innerHTML = "ID POST: <b>" + publicacao.idpost + "</b>";
-                        spancategoria.innerHTML = "Categoria: <b>" + publicacao.categoria + "</b>";
-                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
-                        divconteudo.innerHTML = "Legenda: <b>" + publicacao.conteudo + "</b>";
-                        btnEditar.innerHTML = "Editar";
-                        btnDeletar.innerHTML = "Deletar";
 
-                        divPublicacao.className = "publicacao";
-                        spancategoria.id = "inputNumero" + publicacao.idpost;
-                        spanNome.className = "publicacao-nome";
-                        spancategoria.className = "publicacao-categoria";
-                        divconteudo.className = "publicacao-conteudo";
-
-                        divButtons.className = "div-buttons"
-
-                        // para só aparecer o botão de editar e deletar se o usuario logado for o dono do post
-                        if (publicacao.idusuario == sessionStorage.ID_USUARIO) {
-
-                            btnEditar.className = "publicacao-btn-editar"
-                            btnEditar.id = "btnEditar" + publicacao.idpost;
-                            btnEditar.setAttribute("onclick", `editar(${publicacao.idpost})`);
-
-                            btnDeletar.className = "publicacao-btn-editar"
-                            btnDeletar.id = "btnDeletar" + publicacao.idpost;
-                            btnDeletar.setAttribute("onclick", `deletar(${publicacao.idpost})`);
-
-                            divButtons.appendChild(btnEditar);
-                            divButtons.appendChild(btnDeletar);
-                        }
-
-
-                        divPublicacao.appendChild(spanID);
-                        divPublicacao.appendChild(spanNome);
-                        divPublicacao.appendChild(spancategoria);
-                        divPublicacao.appendChild(divconteudo);
-                        divPublicacao.appendChild(divButtons);
-                        feed.appendChild(divPublicacao);
-                    }
-
-                
-                });
-            } else {
-                throw ('Houve um erro na API!');
-            }
-        }).catch(function (resposta) {
-            console.error(resposta);
-            // finalizarAguardar();
-        });
+                    });
+            }).catch(function (resposta) {
+                console.error(resposta);
+                // finalizarAguardar();
+            });
     }
+
 
 </script>

@@ -41,7 +41,7 @@ body {
   
 }
 .janela{
-background-color: #cce2e1;
+background-color: #f5f5f5;
 
 }
 .label-captura {
@@ -60,9 +60,12 @@ background-color: #cce2e1;
 }
 
 .dash-right .avisos .container .div-form {
-  width: 95%;
+  width: 78%;
   background-color: var(--new-white);
-  padding: 20px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+margin-top: 0 ;
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   margin-top: 9px;
@@ -73,7 +76,13 @@ background-color: #cce2e1;
 }
 
 .dash-right .avisos .div-form label {
-  width: 95%;
+  /* width: 95%; */
+  font-size: 13px;  
+  font-weight: 600;
+
+}
+.dash-right .avisos .div-form label .img-btn {
+margin-left: 3px;
 }
 
 .dash-right .avisos .div-form input {
@@ -82,22 +91,33 @@ background-color: #cce2e1;
 }
 
 .dash-right .avisos .div-form .select-post{
-  width: 200px;
+  width: 150px;
   height: 30px;
-  background-color: #127e7ac8;
+  background-color: #127e7ae6;
   border: none;
-  border-radius: 10px;
-  /* color: var(--new-white); */
+  border-radius: 9px;
+  color: white;
   text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+
+
 
 
 }
 .publicacao-imagem {
-    max-width: 500px;
+    max-width: 300px;
+    max-height: 300px;
     display: flex;
     margin: 10px 0;
+    align-self: center;
 }
 
+.dash-right .avisos .div-form h2{
+text-align: center;
+margin-top: 0;
+color: #127e7a;
+}
 .dash-right .avisos .div-form textarea {
   width: 95%;
   border: 3px solid var(--cor-principal);
@@ -110,11 +130,17 @@ background-color: #cce2e1;
   border: 0;
   border-radius: 5px;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 14px;
   padding: 10px 15px;
   color: white;
-  background-color: #e6005a;
+  background-color: var(--cor-principal);
   width: 120px;
+  
+}
+.dash-right .avisos .div-form button:hover{
+   background-color: #093d3be2;
+   transition: 0.5s;
+  color: #fff;
 }
 
 .publicacao-btn-editar {
@@ -125,7 +151,7 @@ background-color: #cce2e1;
   font-size: 14px;
   padding: 5px 8px;
   color: white;
-  background-color: #e6005a;
+  background-color: var(--cor-principal);
   width: 80px;
   
 }
@@ -159,11 +185,13 @@ color: var(--cor-principal) !important;
 }
 
 .div-results .feed-container {
-  background-color: #cce2e1;
+  /* background-color: #cce2e182; */
   border-radius: 5px;
   margin-bottom: 80px;
   display: flex;
   flex-direction: column-reverse;
+  width: 80%;
+  margin: auto;
 }
 
 .div-buttons {
@@ -434,7 +462,7 @@ canvas {
   display: flex;
   width: 70%;
   height: fit-content;
-  background-color: #cce2e1;
+  /* background-color: #cce2e100; */
   position: relative;
   top: 0;
   left: 25%;
