@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AquaTech | Dashboards</title>
 
-    
+
     <link rel="stylesheet" href="./css/estilo.css" />
     <link rel="stylesheet" href="./css/dashboards.css">
     <script src="../js/sessao.js"></script>
@@ -32,11 +32,24 @@
 
     <div class="janela">
         <div id="sidebar"></div>
-        <div class="kpis">
+
+        <div class="graficos">
+            <div class="grafico-categoria">
+                <canvas id="myChart"></canvas>
+            </div> <!-- grafico-categoria  -->
+
+            <div class="grafico-usuarios">
+
+            </div><!-- grafico-usuario  -->
+
+
+        </div> <!-- graficos  -->
+
+        <!-- <div class="kpis">
        <div class="cards-kpi">
 
-       </div> <!--cards-kpis  -->
-     </div>   <!--kpis  -->
+       </div> cards-kpis  
+     </div>   kpis  -->
     </div> <!--janela  -->
 
     <script src="/js/sessao.js"></script>
@@ -46,7 +59,43 @@
 </html>
 
 <script>
-    
+
+    fetch('/aquarios/qtd')
+        .then(res => res.json()).then(jsoncategorias => {
+            const legendas = jsoncategorias.map(dado => dado.categoria);
+            const valores = jsoncategorias.map(dado => dado.qtd);
+
+            const ctx = document.getElementById('myChart');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: legendas,
+                    datasets: [{
+                        label: 'Quantidade de posts',
+                        data: valores,
+                        borderWidth: 1,
+                        backgroundColor: '#e74c3c'
+
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+        });
+
+
+
+
+
     function alterarTitulo(idAquario) {
         var tituloAquario = document.getElementById(`tituloAquario${idAquario}`)
         var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idAquario).descricao;
@@ -123,7 +172,7 @@
     // }
 
     // // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+    // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
     // A função *plotarGrafico* também invoca a função *atualizarGrafico*
     // function plotarGrafico(resposta, idAquario) {
 
@@ -188,7 +237,7 @@
 
 
     // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-    // buscando a última medida inserida em tabela contendo as capturas, 
+    // buscando a última medida inserida em tabela contendo as capturas,
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
