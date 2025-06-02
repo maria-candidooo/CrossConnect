@@ -221,10 +221,31 @@ color: var(--cor-principal) !important;
 
 /* pagina graficos */
 
-.janela{
-  margin: 0;
-  padding: 0;
+
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* PAGINA DOS GRÁFICOS 2023 */
+
+.janela {
+  display: flex;
+  /* width: 100vw; */
+}
+
+
+.dash-right {
+  display: flex;
+  width: 70%;
+  height: fit-content;
+  /* background-color: #cce2e100; */
+  position: relative;
+  top: 0;
+  left: 25%;
   height: 100vh;
+  overflow: auto;
 }
 .graficos{
   display: flex;
