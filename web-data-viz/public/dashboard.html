@@ -41,7 +41,7 @@
             </div> <!-- grafico-categoria  -->
 
             <div class="grafico-usuarios">
-                <h3>Quantidade De Posts Por Categoria</h3>
+                <h3>Top 10 Usuários Com Maior Pontuação Geral</h3>
 
                 <canvas id="graficoUsers"></canvas>
 
@@ -98,10 +98,10 @@
 
         });
 
-         fetch('/usuarios/qtd')
+         fetch('/usuarios/pontuacao')
         .then(res => res.json()).then(jsonUsers => {
             const legendas = jsonUsers.map(dado => dado.nome.toUpperCase() + ` ` + dado.sobrenome.toUpperCase());
-            const valores = jsonUsers.map(dado => dado.qtd);
+            const valores = jsonUsers.map(dado => dado.pontuacao);
 
             const grafico2 = document.getElementById('graficoUsers');
 
@@ -110,7 +110,7 @@
                 data: {
                     labels: legendas,
                     datasets: [{
-                        label: 'Quantidade de posts',
+                        label: 'Pontuação Geral nos Quizes',
                         data: valores,
                         borderWidth: 1,
                         borderColor: '#127e7ae6',
@@ -128,6 +128,36 @@
             });
 
         });
+        //  fetch('/usuarios/qtd')
+        // .then(res => res.json()).then(jsonUsers => {
+        //     const legendas = jsonUsers.map(dado => dado.nome.toUpperCase() + ` ` + dado.sobrenome.toUpperCase());
+        //     const valores = jsonUsers.map(dado => dado.qtd);
+
+        //     const grafico2 = document.getElementById('graficoUsers');
+
+        //     new Chart(grafico2, {
+        //         type: 'bar',
+        //         data: {
+        //             labels: legendas,
+        //             datasets: [{
+        //                 label: 'Quantidade de posts',
+        //                 data: valores,
+        //                 borderWidth: 1,
+        //                 borderColor: '#127e7ae6',
+        //                 backgroundColor: '#58af9b6b'
+
+        //             }]
+        //         },
+        //         options: {
+        //             responsive: true,
+        //             maintainAspectRatio: false,
+                   
+        //              indexAxis: 'y',
+                    
+        //         }
+        //     });
+
+        // });
 
 
 

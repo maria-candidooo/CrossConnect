@@ -17,5 +17,10 @@ router.get('/qtd', (req, res) => {
 
 });
 
+router.get('/pontuacao', (req, res) => {
+  usuarioController.maiorPontuacao(req, res);
+
+});
+
 
 module.exports = router;

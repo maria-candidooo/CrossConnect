@@ -95,8 +95,18 @@ function qtdPostUsuario(req, res) {
 
 }
 
+function maiorPontuacao(req, res) {
+    usuarioModel.maiorPontuacao()
+        .then(resultado => res.json(resultado))
+        .catch(erro => res.status(500).json(erro));
+
+
+}
+
+
 module.exports = {
     autenticar,
     cadastrar,
-    qtdPostUsuario
+    qtdPostUsuario,
+    maiorPontuacao
 }
