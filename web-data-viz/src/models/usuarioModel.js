@@ -29,7 +29,7 @@ function qtdPostUsuario() {
       from post p
       join usuario u on p.idusuario = u.idusuario
       group by  u.idusuario
-      order by qtd desc`;
+      order by qtd desc limit 10`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
