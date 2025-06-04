@@ -25,20 +25,20 @@
     <!--FONT AWESOME-->
     <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
 </head>
-
-<!-- <body onload=" atualizarFeed()"> -->
-
 <body>
 
     <div class="janela-dash">
         <div id="sidebar"></div>
 
         <div class="graficos">
-            
+
             <div class="grafico-categoria">
                 <h3>Quantidade De Posts Por Categoria</h3>
                 <canvas id="graficoCategoria"></canvas>
-            </div> <!-- grafico-categoria  -->
+                <div class="botoes">
+                    <button onclick="listarFavoritos()">Ver Meus Favoritos</button>
+                </div>
+            </div>  <!-- grafico-categoria  -->
 
             <div class="grafico-usuarios">
                 <h3>Top 10 Usuários Com Maior Pontuação Geral</h3>
@@ -47,14 +47,13 @@
 
             </div><!-- grafico-usuario  -->
 
-
         </div> <!-- graficos  -->
 
-        <!-- <div class="kpis">
-       <div class="cards-kpi">
+        <div id="modal" class="modal">
+            <div id="containerFavoritos" class="containerFavoritos">
+            </div>
+        </div>
 
-       </div> cards-kpis  
-     </div>   kpis  -->
     </div> <!--janela  -->
 
     <script src="/js/sessao.js"></script>
@@ -62,7 +61,7 @@
 </body>
 
 </html>
-
+    
 <script>
 
     fetch('/aquarios/qtd')
@@ -89,6 +88,11 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        },
                         y: {
                             beginAtZero: true
                         }
@@ -98,7 +102,7 @@
 
         });
 
-         fetch('/usuarios/pontuacao')
+    fetch('/usuarios/pontuacao')
         .then(res => res.json()).then(jsonUsers => {
             const legendas = jsonUsers.map(dado => dado.nome.toUpperCase() + ` ` + dado.sobrenome.toUpperCase());
             const valores = jsonUsers.map(dado => dado.pontuacao);
@@ -121,160 +125,67 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                   
-                     indexAxis: 'y',
-                    
+
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+
                 }
             });
 
         });
-        //  fetch('/usuarios/qtd')
-        // .then(res => res.json()).then(jsonUsers => {
-        //     const legendas = jsonUsers.map(dado => dado.nome.toUpperCase() + ` ` + dado.sobrenome.toUpperCase());
-        //     const valores = jsonUsers.map(dado => dado.qtd);
-
-        //     const grafico2 = document.getElementById('graficoUsers');
-
-        //     new Chart(grafico2, {
-        //         type: 'bar',
-        //         data: {
-        //             labels: legendas,
-        //             datasets: [{
-        //                 label: 'Quantidade de posts',
-        //                 data: valores,
-        //                 borderWidth: 1,
-        //                 borderColor: '#127e7ae6',
-        //                 backgroundColor: '#58af9b6b'
-
-        //             }]
-        //         },
-        //         options: {
-        //             responsive: true,
-        //             maintainAspectRatio: false,
-                   
-        //              indexAxis: 'y',
-                    
-        //         }
-        //     });
-
-        // });
 
 
+    function listarFavoritos() {
+
+        document.getElementById("modal").style.display = "flex";
+        const idusuario = sessionStorage.ID_USUARIO;
+        fetch(`/usuarios/listarFavoritos?idusuario=${idusuario}`)
+            .then(res => {
+                if (res.ok) {
+                    res.json().then(resposta => {
+                        console.log(resposta);
+
+                
+                        let telaFavoritos = `<div style="display: flex; justify-content: flex-end; cursor: pointer;"><i class="fa-solid fa-xmark" onclick="fecharModal()"></i></div> <br>
+                        <h2>Favoritos:</h2>`;
+                        resposta.forEach(publicacao => {
+
+                            telaFavoritos += `
+                                <div class="publicacao">
+                                    ${publicacao.imagem ? `<img src="${publicacao.imagem}" alt="" class="publicacao-imagem">` : ""}
+                                    <span><b>ID POST:</b> ${publicacao.idpost}</span>
+                                    <span id="inputNumero${publicacao.idpost}" class="publicacao-categoria"><b>Categoria: </b>${publicacao.categoria}</span>
+                                    <span class="publicacao-nome"><b>Autor: </b>${publicacao.nome.toUpperCase()} ${publicacao.sobrenome.toUpperCase()}</span>
+                                    <div class="publicacao-conteudo"><b>Legenda: </b>${publicacao.conteudo}</div>
+                                   
+                                    </div>
+                                </div>
+                            `;
+
+                        });
+                        document.getElementById('containerFavoritos').innerHTML = telaFavoritos;
+                    });
+                } else {
+                    console.error('Nenhum Post encontrado');
+                }
+            });
+    }
 
 
-
-
-
-    // O gráfico é construído com três funções:
-    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
-    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-    // function obterDadosGrafico(idAquario) {
-
-    //     alterarTitulo(idAquario)
-
-    //     if (proximaAtualizacao != undefined) {
-    //         clearTimeout(proximaAtualizacao);
-    //     }
-
-    //     fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
-    //         if (response.ok) {
-    //             response.json().then(function (resposta) {
-    //                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-    //                 resposta.reverse();
-
-    //                 plotarGrafico(resposta, idAquario);
-
-    //             });
-    //         } else {
-    //             console.error('Nenhum dado encontrado ou erro na API');
-    //         }
-    //     })
-    //         .catch(function (error) {
-    //             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    //         });
-    // }
-
-    // // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-    // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
-    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-    // function plotarGrafico(resposta, idAquario) {
-
-    //     console.log('iniciando plotagem do gráfico...');
-
-    //     // Criando estrutura para plotar gráfico - labels
-    //     let labels = [];
-
-    //     // Criando estrutura para plotar gráfico - dados
-    //     let dados = {
-    //         labels: labels,
-    //         datasets: [{
-    //             label: 'Umidade',
-    //             data: [],
-    //             fill: false,
-    //             borderColor: 'rgb(75, 192, 192)',
-    //             tension: 0.1
-    //         },
-    //         {
-    //             label: 'Temperatura',
-    //             data: [],
-    //             fill: false,
-    //             borderColor: 'rgb(199, 52, 52)',
-    //             tension: 0.1
-    //         }]
-    //     };
-
-    //     console.log('----------------------------------------------')
-    //     console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-    //     console.log(resposta)
-
-    //     // Inserindo valores recebidos em estrutura para plotar o gráfico
-    //     for (i = 0; i < resposta.length; i++) {
-    //         var registro = resposta[i];
-    //         labels.push(registro.momento_grafico);
-    //         dados.datasets[0].data.push(registro.umidade);
-    //         dados.datasets[1].data.push(registro.temperatura);
-    //     }
-
-    //     console.log('----------------------------------------------')
-    //     console.log('O gráfico será plotado com os respectivos valores:')
-    //     console.log('Labels:')
-    //     console.log(labels)
-    //     console.log('Dados:')
-    //     console.log(dados.datasets)
-    //     console.log('----------------------------------------------')
-
-    //     // Criando estrutura para plotar gráfico - config
-    //     const config = {
-    //         type: 'line',
-    //         data: dados,
-    //     };
-
-    //     // Adicionando gráfico criado em div na tela
-    //     let myChart = new Chart(
-    //         document.getElementById(`myChartCanvas${idAquario}`),
-    //         config
-    //     );
-
-    //     setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
-    // }
-
-
-    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-    // buscando a última medida inserida em tabela contendo as capturas,
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-    // function atualizarGrafico(idAquario, dados, myChart) {
-
-
+    function fecharModal() {
+        document.getElementById("modal").style.display = "none";
+    }
 
 
 </script>

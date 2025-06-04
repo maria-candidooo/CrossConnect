@@ -12,13 +12,13 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
-router.get('/qtd', (req, res) => {
-  usuarioController.qtdPostUsuario(req, res);
+router.get('/pontuacao', (req, res) => {
+  usuarioController.maiorPontuacao(req, res);
 
 });
 
-router.get('/pontuacao', (req, res) => {
-  usuarioController.maiorPontuacao(req, res);
+router.get('/listarFavoritos', (req, res) => {
+  usuarioController.listarFavoritos(req, res);
 
 });
 

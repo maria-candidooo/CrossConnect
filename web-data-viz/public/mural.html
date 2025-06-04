@@ -79,8 +79,6 @@
 
     </div>
 
-
-
     <script src="/js/sessao.js"></script>
     <script src="./js/sidebar.js"></script>
 
@@ -90,11 +88,8 @@
 
 <script>
 
-
-    // document.getElementById("nome_user").innerHTML = sessionStorage.NOME_USUARIO;
-
     function limparFormulario() {
-        document.getElementById("div-form").reset();
+        document.getElementById("form_postagem").reset();
     }
 
     function exibirPublicar() {
@@ -112,7 +107,7 @@
         var idusuario = sessionStorage.ID_USUARIO;
         var nome = sessionStorage.NOME_USUARIO;
         var form = document.getElementById("form_postagem");
-        var formData = new FormData(form);
+        var formData = new FormData(form); //p permitir o envio da imagem
         document.getElementById("div-form").style.display = "none"; // para o form desaparecer quando o post for publicado
 
         fetch(`/avisos/publicar/${idusuario}`, {
@@ -167,6 +162,7 @@
         });
     }
 
+
     function atualizarFeed() {
         fetch(`/favoritos/${sessionStorage.ID_USUARIO}`)
             .then(res => res.json())
@@ -174,113 +170,66 @@
                 fetch("/avisos/listar")
                     .then(resposta => resposta.json())
                     .then(posts => {
-                        var feed = document.getElementById("feed_container");
-                        feed.innerHTML = "";
-                        for (let i = 0; i < posts.length; i++) {
-                            let publicacao = posts[i];
+                        let feed = "";
+                        posts.forEach(publicacao => {
+                            // o some percorre o vetor de posts favoritos e verifica, se a condição for verdadeira retorna verdadeiro
                             let favoritado = favoritos.some(fav => fav.idpost == publicacao.idpost);
-
-                            let btnFavoritar = document.createElement("button");
-                            btnFavoritar.innerHTML = favoritado
-                                ? `<i class="fa-solid fa-heart" style="color: #e74c3c"></i>`
-                                : `<i class="fa-regular fa-heart"></i>`;
-                            btnFavoritar.setAttribute("data-favoritado", favoritado);
-
-                            btnFavoritar.onclick = function () {
-                                let estaFavoritado = btnFavoritar.getAttribute("data-favoritado") === "true";
-                                if (!estaFavoritado) {
-                                    fetch('/favoritos', {
-                                        method: 'POST',
-                                        headers: { 'Content-Type': 'application/json' },
-                                        body: JSON.stringify({
-                                            idusuario: sessionStorage.ID_USUARIO,
-                                            idpost: publicacao.idpost,
-                                        })
-                                    }).then(res => {
-                                        if (res.ok) {
-                                            btnFavoritar.innerHTML = `<i class="fa-solid fa-heart" style="color: #e74c3c"></i>`;
-                                            btnFavoritar.setAttribute("data-favoritado", "true");
-                                        }
-                                    });
-                                } else {
-                                    fetch(`/favoritos/${publicacao.idpost}/${sessionStorage.ID_USUARIO}`, {
-                                        method: 'DELETE'
-                                    }).then(res => {
-                                        if (res.ok) {
-                                            btnFavoritar.innerHTML = `<i class="fa-regular fa-heart"></i>`;
-                                            btnFavoritar.setAttribute("data-favoritado", "false");
-                                        }
-                                    });
+                            feed += `
+                            <div class="publicacao">
+                                ${publicacao.imagem ? `<img src="${publicacao.imagem}" alt="" class="publicacao-imagem">` : ""}
+                                <span>ID POST: <b>${publicacao.idpost}</b></span>
+                                <span id="inputNumero${publicacao.idpost}" class="publicacao-categoria">Categoria: <b>${publicacao.categoria}</b></span>
+                                <span class="publicacao-nome">Autor: <b>${publicacao.nome.toUpperCase()} ${publicacao.sobrenome.toUpperCase()}</b></span>
+                                <div class="publicacao-conteudo">Legenda: <b>${publicacao.conteudo}</b></div>
+                                <div class="div-buttons">
+                                    ${publicacao.idusuario == sessionStorage.ID_USUARIO ? `
+                                        <button class="publicacao-btn-editar" id="btnEditar${publicacao.idpost}" onclick="editar(${publicacao.idpost})">Editar</button>
+                                        <button class="publicacao-btn-editar" id="btnDeletar${publicacao.idpost}" onclick="deletar(${publicacao.idpost})">Deletar</button>
+                                    ` : ""}
+                                    <button class="btn-favoritar" onclick="favoritar(this)" 
+                                    data-idpost="${publicacao.idpost}" 
+                                    data-favoritado="${favoritado}">
+                                        ${favoritado ? `<i class="fa-solid fa-heart" style="color: #e74c3c"></i>`
+                                    : `<i class="fa-regular fa-heart"></i>`
                                 }
-                            };
-
-                            // criando e manipulando elementos do HTML via JavaScript
-                            let divPublicacao = document.createElement("div");
-                            let spanID = document.createElement("span");
-                            let spancategoria = document.createElement("span");
-                            let spanNome = document.createElement("span");
-                            let divconteudo = document.createElement("div");
-                            let divButtons = document.createElement("div");
-                            let btnEditar = document.createElement("button");
-                            let btnDeletar = document.createElement("button");
-
-
-                            // cria elemento de imagem se houver imagem
-                            if (publicacao.imagem) {
-                                var img = document.createElement("img");
-                                img.src = publicacao.imagem;
-                                img.alt = "";
-                                img.className = "publicacao-imagem";
-                                divPublicacao.appendChild(img);
-                            }
-
-                            spanID.innerHTML = "ID POST: <b>" + publicacao.idpost + "</b>";
-                            spancategoria.innerHTML = "Categoria: <b>" + publicacao.categoria + "</b>";
-                            spanNome.innerHTML = "Autor: <b>" + publicacao.nome.toUpperCase() + " " + publicacao.sobrenome.toUpperCase() + "</b>";
-                            divconteudo.innerHTML = "Legenda: <b>" + publicacao.conteudo + "</b>";
-                            btnEditar.innerHTML = "Editar";
-                            btnDeletar.innerHTML = "Deletar";
-
-
-                            divPublicacao.className = "publicacao";
-                            spancategoria.id = "inputNumero" + publicacao.idpost;
-                            spanNome.className = "publicacao-nome";
-                            spancategoria.className = "publicacao-categoria";
-                            divconteudo.className = "publicacao-conteudo";
-                            divButtons.className = "div-buttons"
-
-                            // para só aparecer o botão de editar e deletar se o usuario logado for o dono do post
-                            if (publicacao.idusuario == sessionStorage.ID_USUARIO) {
-
-                                btnEditar.className = "publicacao-btn-editar"
-                                btnEditar.id = "btnEditar" + publicacao.idpost;
-                                btnEditar.setAttribute("onclick", `editar(${publicacao.idpost})`);
-
-                                btnDeletar.className = "publicacao-btn-editar"
-                                btnDeletar.id = "btnDeletar" + publicacao.idpost;
-                                btnDeletar.setAttribute("onclick", `deletar(${publicacao.idpost})`);
-
-                                divButtons.appendChild(btnEditar);
-                                divButtons.appendChild(btnDeletar);
-                            }
-
-                            divButtons.appendChild(btnFavoritar);
-
-                            divPublicacao.appendChild(spanID);
-                            divPublicacao.appendChild(spanNome);
-                            divPublicacao.appendChild(spancategoria);
-                            divPublicacao.appendChild(divconteudo);
-                            divPublicacao.appendChild(divButtons);
-                            feed.appendChild(divPublicacao);
-                        }
-
-
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        });
+                        document.getElementById("feed_container").innerHTML = feed;
                     });
             }).catch(function (resposta) {
                 console.error(resposta);
-                // finalizarAguardar();
             });
     }
 
-
+    function favoritar(btn) {
+        let idpost = btn.getAttribute("data-idpost");
+        let estaFavoritado = btn.getAttribute("data-favoritado") === "true";
+        if (!estaFavoritado) {
+            fetch('/favoritos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }, // informa q os dados estão em formato de json
+                body: JSON.stringify({ //stringify transforma um obj de js em um json
+                    idusuario: sessionStorage.ID_USUARIO,
+                    idpost: idpost,
+                })
+            }).then(res => {
+                if (res.ok) {
+                    btn.innerHTML = `<i class="fa-solid fa-heart" style="color: #e74c3c"></i>`;
+                    btn.setAttribute("data-favoritado", "true");
+                }
+            });
+        } else {
+            fetch(`/favoritos/${idpost}/${sessionStorage.ID_USUARIO}`, {
+                method: 'DELETE'
+            }).then(res => {
+                if (res.ok) {
+                    btn.innerHTML = `<i class="fa-regular fa-heart"></i>`;
+                    btn.setAttribute("data-favoritado", "false");
+                }
+            });
+        }// fim else
+    };// fim da funçao de favoritar
 </script>

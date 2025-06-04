@@ -433,7 +433,7 @@
             } else if (numeroDaQuestaoAtual == quantidadeDeQuestoes - 1) { // se o numero da questao atual for igual a penultima questaão
                 alert("Atenção... a próxima é a ultima questão!")
                 preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
-                // document.getElementById('btnTentarNovamente').disabled = false;
+               
             } else { // se não, finalize o jogo
                 finalizarJogo()
             }
@@ -527,8 +527,6 @@
 
 
             btnSubmeter.disabled = true
-            // btnConcluir.disabled = true
-            // btnTentarNovamente.disabled = false
              fetch("/quiz/guardarPontuacao", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

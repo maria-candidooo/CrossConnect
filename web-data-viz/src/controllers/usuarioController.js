@@ -16,7 +16,7 @@ function autenticar(req, res) {
             .then(
                 function (resultadoAutenticar) {
                     console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
+                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma um obj em JSON 
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
@@ -52,9 +52,6 @@ function cadastrar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
-
-
-
     // Faça as validações dos valores
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
@@ -87,14 +84,6 @@ function cadastrar(req, res) {
     }
 }
 
-function qtdPostUsuario(req, res) {
-    usuarioModel.qtdPostUsuario()
-        .then(resultado => res.json(resultado))
-        .catch(erro => res.status(500).json(erro));
-
-
-}
-
 function maiorPontuacao(req, res) {
     usuarioModel.maiorPontuacao()
         .then(resultado => res.json(resultado))
@@ -102,11 +91,20 @@ function maiorPontuacao(req, res) {
 
 
 }
+function listarFavoritos(req, res) {
+    const idusuario = req.query.idusuario;
+
+    usuarioModel.listarFavoritos(idusuario)
+
+        .then(resultado => res.json(resultado))
+        .catch(erro => res.status(500).json(erro));
+
+}
 
 
 module.exports = {
     autenticar,
     cadastrar,
-    qtdPostUsuario,
-    maiorPontuacao
+    maiorPontuacao,
+    listarFavoritos
 }
