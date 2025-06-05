@@ -34,7 +34,11 @@ create table favoritos (
   constraint fk_favoritos_post foreign key (idpost) references post (idpost),
   constraint fk_favoritos_usuario foreign key (idusuario) references usuario (idusuario)
 );
-select * from usuario;
 
+show tables;
+select * from usuario;
 select * from quiz;
+select * from post;
+select * from favoritos;
+
 
