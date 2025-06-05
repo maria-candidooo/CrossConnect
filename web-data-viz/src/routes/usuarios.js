@@ -22,5 +22,10 @@ router.get('/listarFavoritos', (req, res) => {
 
 });
 
+router.get('/listarPostsDoUser', (req, res) => {
+  usuarioController.listarPostsDoUser(req, res);
+
+});
+
 
 module.exports = router;

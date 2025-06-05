@@ -109,7 +109,7 @@ body {
 }
 
 .publicacao-imagem {
-  max-width: 300px;
+  max-width: 400px;
   max-height: 300px;
   display: flex;
   margin: 10px 0;
@@ -172,7 +172,7 @@ body {
   padding: 15px;
   background-color: var(--new-white);
   margin-bottom: 24px;
-  border-radius: 3px;
+  border-radius: 2px;
   color: var(--new-black);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   text-align: justify;
@@ -188,7 +188,7 @@ body {
 }
 
 .div-results {
-  width: 100%;
+  width: 90%;
 }
 
 .div-results .feed-container {
@@ -224,6 +224,12 @@ body {
   padding: 10px 10px;
   border: none;
   cursor: pointer;
+}
+
+.btn-favoritar{
+  border: none;
+  cursor: pointer;
+  font-size: large;
 }
 
 /* pagina graficos */

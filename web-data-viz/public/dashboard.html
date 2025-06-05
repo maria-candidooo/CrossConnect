@@ -29,6 +29,7 @@
 
     <div class="janela-dash">
         <div id="sidebar"></div>
+          <!-- <h1 id="nome_user"></h1> -->
 
         <div class="graficos">
 
@@ -36,7 +37,8 @@
                 <h3>Quantidade De Posts Por Categoria</h3>
                 <canvas id="graficoCategoria"></canvas>
                 <div class="botoes">
-                    <button onclick="listarFavoritos()">Ver Meus Favoritos</button>
+                    <button onclick="listarFavoritos()">Ver Meus Posts Favoritos</button>
+                    <button onclick="listarPostsDoUser()">Ver Meus Posts</button>
                 </div>
             </div>  <!-- grafico-categoria  -->
 
@@ -54,12 +56,16 @@
             </div>
         </div>
 
+        <div id="modal" class="modal">
+            <div id="containerMeusPosts" class="containerFavoritos">
+            </div>
+        </div>
+
     </div> <!--janela  -->
 
     <script src="/js/sessao.js"></script>
     <script src="./js/sidebar.js"></script>
 </body>
-
 </html>
     
 <script>
@@ -114,7 +120,7 @@
                 data: {
                     labels: legendas,
                     datasets: [{
-                        label: 'Pontuação Geral nos Quizes',
+                        label: 'Quantidade de acertos nos Quizes',
                         data: valores,
                         borderWidth: 1,
                         borderColor: '#127e7ae6',
@@ -182,6 +188,41 @@
             });
     }
 
+ function listarPostsDoUser() {
+
+        document.getElementById("modal").style.display = "flex";
+        const idusuario = sessionStorage.ID_USUARIO;
+        fetch(`/usuarios/listarPostsDoUser?idusuario=${idusuario}`)
+            .then(res => {
+                if (res.ok) {
+                    res.json().then(resposta => {
+                        console.log(resposta);
+
+                
+                        let telaFavoritos = `<div style="display: flex; justify-content: flex-end; cursor: pointer;"><i class="fa-solid fa-xmark" onclick="fecharModal()"></i></div> <br>
+                        <h2>Meus Posts:</h2>`;
+                        resposta.forEach(publicacao => {
+
+                            telaFavoritos += `
+                                <div class="publicacao">
+                                    ${publicacao.imagem ? `<img src="${publicacao.imagem}" alt="" class="publicacao-imagem">` : ""}
+                                    <span><b>ID POST:</b> ${publicacao.idpost}</span>
+                                    <span id="inputNumero${publicacao.idpost}" class="publicacao-categoria"><b>Categoria: </b>${publicacao.categoria}</span>
+                                    <span class="publicacao-nome"><b>Autor: </b>${publicacao.nome.toUpperCase()} ${publicacao.sobrenome.toUpperCase()}</span>
+                                    <div class="publicacao-conteudo"><b>Legenda: </b>${publicacao.conteudo}</div>
+                                   
+                                    </div>
+                                </div>
+                            `;
+
+                        });
+                        document.getElementById('containerFavoritos').innerHTML = telaFavoritos;
+                    });
+                } else {
+                    console.error('Nenhum Post encontrado');
+                }
+            });
+    }
 
     function fecharModal() {
         document.getElementById("modal").style.display = "none";

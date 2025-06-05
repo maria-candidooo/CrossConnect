@@ -12,7 +12,9 @@
     <div class="main-quiz" id="main-quiz">
         <div id="sidebar"></div>
         <!-- <h2>QUIZ</h2> -->
-        <img src="./assets/quiz.png" alt="QUIZ" class="imgquiz">
+         <h2 id="h2Quiz" class="h2Quiz">QUIZ BÍBLICO</h2>
+         <p class="pquiz" id="pquiz">Clique em "Iniciar Quiz" para começar a jogar.</p>
+        <img src="./assets/quiz.png" alt="QUIZ" class="imgquiz" id="imgquiz">
         <div id="pontuacaoEJogo">
             <div id="quiz-cards" class="quiz-cards">
                 <div class="card" data-quiz="livroAtos">
@@ -244,31 +246,22 @@
         let quizBiblia2 = [
 
             {
-                pergunta: "Qual mês moises dias?",
-                alternativaA: "Janeiro",
-                alternativaB: "Dezembro",
-                alternativaC: "Junho",
-                alternativaD: "Agosto",
+                pergunta: "Quem foi lançado na cova dos leões por continuar orando a Deus?",
+                alternativaA: "Moisés",
+                alternativaB: "Davi",
+                alternativaC: "Daniel",
+                alternativaD: "Elias",
                 alternativaCorreta: "alternativaC"
             },
 
             {
-                pergunta: "Quantas horas tem em um dia?",
-                alternativaA: "30 horas",
-                alternativaB: "38 horas",
-                alternativaC: "48 horas",
-                alternativaD: "24 horas",
+                pergunta: "Quantos dias e noites choveu durante o dilúvio de Noé?",
+                alternativaA: "30",
+                alternativaB: "20",
+                alternativaC: "50",
+                alternativaD: "40",
                 alternativaCorreta: "alternativaD"
             },
-
-            {
-                pergunta: "Qual destes números é ímpar?",
-                alternativaA: "Dez",
-                alternativaB: "Doze",
-                alternativaC: "Oito",
-                alternativaD: "Onze",
-                alternativaCorreta: "alternativaD"
-            }
 
         ]
 
@@ -355,9 +348,13 @@
 
         function iniciarQuiz() {
             quantidadeDeQuestoes = listaDeQuestoes.length;
+            document.getElementById('imgquiz').style.display = "flex";
             document.getElementById('pontuacao').style.display = "flex";
             document.getElementById('jogo').style.display = "flex";
+            document.getElementById('pquiz').style.display = "none";
+            document.getElementById('h2Quiz').style.display = "none";
             document.getElementById('main-quiz').style.backgroundImage = "url('./assets/banner-quiz.png')";
+
 
             // Oculta todos os botões de iniciar quiz
             document.querySelectorAll('.btnIniciarQuiz').forEach(btn => btn.style.display = "none");

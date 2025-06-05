@@ -101,10 +101,21 @@ function listarFavoritos(req, res) {
 
 }
 
+function listarPostsDoUser(req, res) {
+    const idusuario = req.query.idusuario;
+
+    usuarioModel.listarPostsDoUser(idusuario)
+
+        .then(resultado => res.json(resultado))
+        .catch(erro => res.status(500).json(erro));
+
+}
+
 
 module.exports = {
     autenticar,
     cadastrar,
     maiorPontuacao,
-    listarFavoritos
+    listarFavoritos,
+    listarPostsDoUser
 }

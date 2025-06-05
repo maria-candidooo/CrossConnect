@@ -171,10 +171,10 @@
                             feed += `
                             <div class="publicacao">
                                 ${publicacao.imagem ? `<img src="${publicacao.imagem}" alt="" class="publicacao-imagem">` : ""}
-                                <span>ID POST: <b>${publicacao.idpost}</b></span>
-                                <span id="inputNumero${publicacao.idpost}" class="publicacao-categoria">Categoria: <b>${publicacao.categoria}</b></span>
-                                <span class="publicacao-nome">Autor: <b>${publicacao.nome.toUpperCase()} ${publicacao.sobrenome.toUpperCase()}</b></span>
-                                <div class="publicacao-conteudo">Legenda: <b>${publicacao.conteudo}</b></div>
+                                <span><b>ID POST:</b> ${publicacao.idpost}</span>
+                                <span id="inputNumero${publicacao.idpost}" class="publicacao-categoria"><b>Categoria:</b> ${publicacao.categoria}</span>
+                                <span class="publicacao-nome"><b>Autor:</b> ${publicacao.nome.toUpperCase()} ${publicacao.sobrenome.toUpperCase()}</span>
+                                <div class="publicacao-conteudo"><b>Legenda:</b> ${publicacao.conteudo}</div>
                                 <div class="div-buttons">
                                     ${publicacao.idusuario == sessionStorage.ID_USUARIO ? `
                                         <button class="publicacao-btn-editar" id="btnDeletar${publicacao.idpost}" onclick="deletar(${publicacao.idpost})">Deletar</button>

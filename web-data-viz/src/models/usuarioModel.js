@@ -44,9 +44,20 @@ join usuario u  on u.idusuario = f.idusuario where u.idusuario = ${idusuario};
     return database.executar(instrucaoSql);
 }
 
+function listarPostsDoUser(idusuario) {
+    const instrucaoSql = `
+        
+select * from post p
+join usuario u on u.idusuario = p.idusuario
+where p.idusuario = ${idusuario};
+    `;
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     maiorPontuacao,
-    listarFavoritos
+    listarFavoritos,
+    listarPostsDoUser
 };

@@ -53,7 +53,8 @@ main {
   border-bottom: solid #0664617f 1px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  background-color: var(--cor-principal);
+  /* background-color: var(--cor-principal); */
+  background-color: #fff;
   z-index: 99;
   position: absolute;
   width: 100%;
@@ -70,7 +71,7 @@ main {
 }
 
 .header .container-nav img {
-  width: 10vw;
+  width: 3vw;
 }
 
 .header .container-nav .logo {
@@ -90,12 +91,12 @@ main {
 
 .navbar a,
 li {
-  color: white;
+  color: var(--cor-principal);
   text-decoration: none;
 }
 
 .navbar a:hover {
-  color: #fff;
+  color: #127e7a;
   font-weight: 600;
 }
 
@@ -139,7 +140,7 @@ li {
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 67vh;
+  height: 70vh;
 }
 
 .social .sobre-nos {
@@ -153,7 +154,7 @@ li {
 
 .social .sobre-nos .texto {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
+  padding: 25px;
   margin: 20px;
   border-radius: 5px;
   font-weight: 400;
@@ -162,13 +163,19 @@ li {
 
 .container-sobre {
   background-color: var(--cor-principal);
-  height: 66vh;
+  height: 70vh;
 }
 
 .container-sobre h2 {
   text-align: center;
   color: #ebebeb;
   padding-top: 20px;
+}
+
+.container-sobre .box p {
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
 }
 
 .boxes {
@@ -206,8 +213,56 @@ li {
   justify-content: center;
   width: 100%;
   height: 67vh;
+  align-items:center ;
+  flex-direction: column;
+  text-align: center;
+}
+.convite img{
+  width: 250px;
+  height: 250px;
+  border-radius: 10px;
+  
+}
+.convite .div-ods{
+  display: flex;
+    width: 60%;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+.convite .div-ods .texto-ods{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  text-align: justify;
+  margin-left: 20px;
+}
+.h2title{
+  font-size: 40px;
+  margin-bottom: 0;
 }
 
+.conteudo-banner a{
+   color: #fff;
+  text-decoration: none;
+  background-color: #127e7a4c;
+  width: 120px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  font-size: 14px;
+  border-radius: 5px;
+  transition: .5s;
+  padding: 2px;
+}
+
+.conteudo-banner a:hover{
+  background-color: #127e7aba;
+  font-weight: 600;
+
+}
 /*CSS FOOTER*/
 /*-------------------------------------------------------------------*/
 .footer {
@@ -690,7 +745,7 @@ li {
   height: 100vh;
   align-items: center;
   flex-direction: column;
-  background-color: #cce2e1;
+  background-color: #f5f5f5;
 }
 #pontuacaoEJogo{
   display: flex;
@@ -700,14 +755,7 @@ li {
   top: 0;
 
 }
-/* .main-quiz h2{
-  font-family: "Barlow", sans-serif !important;
-  font-weight: 800;
-  font-style: normal;
-  font-size: 50px;
- 
 
-} */
 .quiz-cards {
     display: flex;
     width: 80%;
@@ -832,7 +880,7 @@ li {
 
  #jogo{
   margin-left:  450px;
-  
+  padding: 20px;
   width: 35%;
   justify-content: center;
   border-radius: 5px;
@@ -878,4 +926,24 @@ align-items: center;
   margin-top: 10px;
    margin-bottom: 0;
   margin-left:  25px;
+  display: none;
+  /* position: fixed; */
+}
+
+.h2Quiz{
+  color: var(--cor-principal);
+  font-size: 40px;
+  /* text-align: center; */
+  margin-left: 40px;
+  font-style: italic;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.pquiz{
+  color: #343030ae;
+   font-size: 12px; 
+   margin-bottom: 14px;
+  margin-left: 40px;
+
 }
