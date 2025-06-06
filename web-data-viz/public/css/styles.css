@@ -959,7 +959,6 @@ align-items: center;
   background-color: #f5f5f5;
   position: relative;
 
-
 }
 .containercards{
     width: 100%;
@@ -967,7 +966,7 @@ align-items: center;
 }
 .main-devocionais h1{
       color: #127e7a;
-    margin-left:  105px;
+    margin-left:  106px;
 
 
 }
@@ -989,8 +988,6 @@ align-items: center;
     text-align: center;
     justify-content: space-evenly;
     border-radius: 10px;
-    /* box-shadow: rgba(20, 20, 22, 0.2) 0px 7px 29px 0px;
-     */
      box-shadow: rgba(25, 25, 25, 0.35) 0px 5px 15px;
 }
 
