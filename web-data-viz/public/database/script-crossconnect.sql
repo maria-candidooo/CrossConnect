@@ -14,7 +14,7 @@ create table post (
   idusuario int not null,
   conteudo varchar(600),
   imagem text,
-  categoria enum('Dúvidas', 'Testemunhos', 'Pedidos de Oração', 'Eventos', 'Outros'),
+  categoria enum( 'Testemunhos', 'Pedidos de Oração', 'Eventos', 'Outros'),
   status enum('Ativo', 'Inativo', 'Em análise') default 'Ativo',
   data datetime,
   constraint fk_post_usuario foreign key (idusuario) references usuario (idusuario)
@@ -42,3 +42,10 @@ select * from post;
 select * from favoritos;
 
 
+insert into usuario (nome, sobrenome, email, senha)
+values
+('maria',	'candido',	'maria@sptech.school',	'123456'),
+('Julia',	'Lima', 'ju@sptech.school',	'123456'),
+('Lais',	'souza',	'lais@sptech.school',	'123456'),
+('larissa',	'souza',	'lari@sptech.school',	'123456'),
+('roberta',	'alessandra',	'ro@gmail.com', '123456');
